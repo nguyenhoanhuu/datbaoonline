@@ -28,6 +28,7 @@ public class DonHangDTO extends AbstractDTO{
 	private String SDT;
 	private int  maKhuyenMai;
 	private String tenKhuyenMai;
+	private double giaTriGiam;
 	private LocalDateTime ngayTaoDonHang;
 	private String trangThaiDonHang;
 	private String diaChiNhanHang;
