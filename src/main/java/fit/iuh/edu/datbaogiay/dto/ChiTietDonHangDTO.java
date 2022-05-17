@@ -20,7 +20,6 @@ public class ChiTietDonHangDTO {
 	private int madonHang;
 	private int mabao;
 	private String tenBao;
-	private double dongia;
 	private LocalDateTime ngayDatBao;
 	private LocalDateTime ngatKetThucDatBao;
 	private double donGia;

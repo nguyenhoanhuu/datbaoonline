@@ -49,6 +49,7 @@ public class ChiTietDonHangConvert {
 					chiTietDonHangDTO.setMabao(chiTietDonHang.getBao().getid());
 					chiTietDonHangDTO.setTenBao(chiTietDonHang.getBao().getTenBao());
 					chiTietDonHangDTO.setNgayDatBao(chiTietDonHang.getNgayDatBao());
+					
 					chiTietDonHangDTO.setNgatKetThucDatBao(chiTietDonHang.getNgatKetThucDatBao());
 					chiTietDonHangDTO.setSoLuong(chiTietDonHang.getSoLuong());
 					chiTietDonHangDTO.setSoKy(chiTietDonHang.getSoKy());
