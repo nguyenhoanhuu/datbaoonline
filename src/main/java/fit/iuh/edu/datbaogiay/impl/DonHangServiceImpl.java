@@ -8,14 +8,22 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fit.iuh.edu.datbaogiay.convert.ChiTietDonHangConvert;
 import fit.iuh.edu.datbaogiay.convert.DonHangConvert;
 import fit.iuh.edu.datbaogiay.dto.BaoDto;
+import fit.iuh.edu.datbaogiay.dto.ChiTietDonHangDTO;
+import fit.iuh.edu.datbaogiay.dto.ChiTietGioHangDto;
 import fit.iuh.edu.datbaogiay.dto.DonHangDTO;
 import fit.iuh.edu.datbaogiay.entity.Bao;
 import fit.iuh.edu.datbaogiay.entity.ChiTietDonHang;
+import fit.iuh.edu.datbaogiay.entity.ChiTietDonHangPk;
 import fit.iuh.edu.datbaogiay.entity.DonHang;
+import fit.iuh.edu.datbaogiay.entity.KhachHang;
+import fit.iuh.edu.datbaogiay.entity.KhuyenMai;
+import fit.iuh.edu.datbaogiay.repository.BaoRepository;
+import fit.iuh.edu.datbaogiay.repository.ChiTietDonHangRepository;
 import fit.iuh.edu.datbaogiay.repository.DonHangRepository;
 import fit.iuh.edu.datbaogiay.service.DonHangService;
 
@@ -27,8 +35,11 @@ public class DonHangServiceImpl implements DonHangService {
 	private DonHangConvert donHangConvert;
 	@Autowired
 	private ChiTietDonHangConvert chiTietDonHangConvert; 
-//	private ChiTietDonHangConvert chiTietDonHangConvert;
 	@Autowired
+	private ChiTietDonHangRepository chiTietDonHangRepository;
+	@Autowired
+	private BaoRepository baoRepository;
+	
 	public DonHangServiceImpl(DonHangRepository donHangRepository) {
 		super();
 		this.donHangRepository = donHangRepository;
@@ -67,23 +78,32 @@ public class DonHangServiceImpl implements DonHangService {
 		return "xóa thành công";
 	}
 
+	@Transactional
 	@Override
-	public DonHangDTO luuDonHang(DonHangDTO donHangDTO) {
-		DonHang  donHang= donHangConvert.chuyendonHangEntity(donHangDTO);
-		int maDonHang = donHang.getid();
-		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>(); 
-		donHangDTO.getChiTietDonHang().forEach(
-				chiTietDonHangDTO1 ->{
-					ChiTietDonHang a = chiTietDonHangConvert.chuyenChiTietDonHangEntity(chiTietDonHangDTO1,maDonHang);
-					chiTietDonHangs.add(a);
-				}
-				);
-		donHang.setChiTietDonHang(chiTietDonHangs);
+	public void luuDonHang(DonHangDTO donHangDTO) {
 		
-				donHangRepository.save(donHang);
-		
-		
-		return	donHangConvert.chuyendonHangDTO(donHang);
+		DonHang donHang = new DonHang();
+		donHang.setKhachHang(new KhachHang(donHangDTO.getMaKhachHang()));
+		donHang.setKhuyenMai(new KhuyenMai(donHangDTO.getMaKhuyenMai()));
+		donHang.setNgayTaoDonHang(donHangDTO.getNgayTaoDonHang());
+		donHang.setTrangThaiDonHang(donHangDTO.getTrangThaiDonHang());
+		donHang.setDiaChiNhanHang(donHangDTO.getDiaChiNhanHang());
+		donHang.setTongTienDonHang(donHangDTO.getTongTienDonHang());
+		donHang.setHinhThucThanhToan(donHangDTO.getHinhThucThanhToan());
+		donHangRepository.save(donHang);
+
+		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
+		for(ChiTietDonHangDTO chiTietDonHangDTO :donHangDTO.getChiTietDonHang() ) {
+			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
+			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(),chiTietDonHangDTO.getMabao()));
+			chiTietDonHang.setNgayDatBao(chiTietDonHangDTO.getNgayDatBao());
+			chiTietDonHang.setNgatKetThucDatBao(chiTietDonHangDTO.getNgatKetThucDatBao());
+			chiTietDonHang.setSoKy(chiTietDonHangDTO.getSoKy());
+			chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
+			chiTietDonHangs.add(chiTietDonHang);
+			
+		}
+		chiTietDonHangRepository.saveAll(chiTietDonHangs);
 	}
 
 }

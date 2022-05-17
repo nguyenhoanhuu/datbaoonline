@@ -49,6 +49,7 @@ public class DonHangController {
 		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
 		return "PageChiTietDonHang";
 	}
+
 	@GetMapping("/doanhThu/put/{madonhang}")
 	public String layDonHangTheoId1(@PathVariable int  madonhang,Model model) {
 		
@@ -65,6 +66,7 @@ public class DonHangController {
 	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
 		return donHangService.luuDonHang(donHangDTO);
 	}
+
 	@DeleteMapping("/donhang/{madonhang}")
 	public String xoaDonHang(@PathVariable int  madonhang) {
 		return donHangService.xoaDonHang(madonhang);

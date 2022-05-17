@@ -10,6 +10,6 @@ public interface DonHangService {
 	public List<DonHangDTO> layDSDonHang();
 	public DonHangDTO layDonHangTheoId(int id);
 	public String xoaDonHang(int id);
-	public DonHangDTO luuDonHang(DonHangDTO donHangDTO);
+	public void luuDonHang(DonHangDTO donHangDTO);
 	
 }
