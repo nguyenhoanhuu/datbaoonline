@@ -85,7 +85,7 @@
                 <div class="MultiCarousel-inner">
                     <div class="item" th:each="tempBao : ${baos}">
                         <div class="item1">
-                            <i><img src="../img/product_demo.jpg" alt=""
+                            <i><img th:src="${tempBao.hinhAnh}" alt=""
                                     id="img1"></i>
                             <div class="order_product">
                                 <span th:text="${tempBao.getTenBao()}">Lorem ipsum dolor sit a</span>

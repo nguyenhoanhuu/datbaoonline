@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fit.iuh.edu.datbaogiay.dto.BaoDto;
 import fit.iuh.edu.datbaogiay.dto.KhachHangDto;
+import fit.iuh.edu.datbaogiay.dto.KhuyenMaiDto;
 import fit.iuh.edu.datbaogiay.entity.Bao;
 import fit.iuh.edu.datbaogiay.service.BaoService;
 
@@ -44,7 +46,7 @@ public class BaoController {
 		theModel.addAttribute("dsBao", baos);
 		return "PageChinh";
 	}
-	@GetMapping(value = "/admin/bao", consumes = MediaType.ALL_VALUE)
+	@GetMapping(value = "/admin/bao/show", consumes = MediaType.ALL_VALUE)
 	public String danhSachBao1(Model theModel) {
 		List<BaoDto> baos = BaoService.layDSBao();
 		theModel.addAttribute("dsBao", baos);
@@ -75,10 +77,28 @@ public class BaoController {
 		return "PageChiTietBao";
 		
 	}
+	
+	
+	@GetMapping("/admin/bao/put/{maBao}")
+//	@RequestMapping(value = "/put/{maBao}")
+	public String laybaoTheoid(@PathVariable int maBao,Model model) {
+		 BaoDto baoDto = BaoService.layBaoTheoID(maBao);
+		 model.addAttribute("bao", baoDto);
+		 return "PageThemBao";
+		 
+	}
+	@GetMapping("/admin/bao/put")
+	public String	laybaoTheoid(Model model) {
+		KhuyenMaiDto khuyenMaiDto= new KhuyenMaiDto();
+		BaoDto baoDto = new BaoDto();
+		 model.addAttribute("bao", baoDto);
+		 return "PageThemBao";
+	}
 
-	@PostMapping(value = "/bao", consumes = MediaType.ALL_VALUE)
-	public BaoDto luuBao(@RequestBody BaoDto baoDto) {
-		return BaoService.luuBao(baoDto);
+	@PostMapping(value = "/admin/bao/addbao", consumes = MediaType.ALL_VALUE)
+	public String luuBao(@ModelAttribute("bao") BaoDto baoDto) {
+		 BaoService.luuBao(baoDto);
+		 return "redirect:/admin/bao/show";
 	}
 
 	@PutMapping(value = "/bao", consumes = MediaType.ALL_VALUE)
@@ -86,8 +106,10 @@ public class BaoController {
 		return BaoService.luuBao(baoDto);
 	}
 
-	@DeleteMapping("/bao/{maBao}")
+//	@DeleteMapping("/bao/{maBao}")
+	@RequestMapping(value = "/admin/bao/{maBao}")
 	public String xoaBao(@PathVariable int maBao) {
-		return BaoService.xoaBao(maBao);
+		 BaoService.xoaBao(maBao);
+		 return "redirect:/admin/bao/show";
 	}
 }
