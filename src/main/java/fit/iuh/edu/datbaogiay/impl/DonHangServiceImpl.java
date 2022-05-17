@@ -39,7 +39,7 @@ public class DonHangServiceImpl implements DonHangService {
 	private ChiTietDonHangRepository chiTietDonHangRepository;
 	@Autowired
 	private BaoRepository baoRepository;
-	
+	private double tongThanhTien;
 	public DonHangServiceImpl(DonHangRepository donHangRepository) {
 		super();
 		this.donHangRepository = donHangRepository;
@@ -83,6 +83,15 @@ public class DonHangServiceImpl implements DonHangService {
 	public void luuDonHang(DonHangDTO donHangDTO) {
 		
 		DonHang donHang = new DonHang();
+		
+//		 tongThanhTien=0;
+//			donHang.getChiTietDonHang().forEach(a-> 
+//			{
+//				ChiTietDonHangDTO chiTietDonHangDTO= chiTietDonHangConvert.chuyenChiTietDonHangDto(a);
+//				tongThanhTien+= chiTietDonHangDTO.getThanhTien();
+//			
+//			}
+		
 		donHang.setKhachHang(new KhachHang(donHangDTO.getMaKhachHang()));
 		donHang.setKhuyenMai(new KhuyenMai(donHangDTO.getMaKhuyenMai()));
 		donHang.setNgayTaoDonHang(donHangDTO.getNgayTaoDonHang());
@@ -93,6 +102,7 @@ public class DonHangServiceImpl implements DonHangService {
 		donHangRepository.save(donHang);
 
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
+		
 		for(ChiTietDonHangDTO chiTietDonHangDTO :donHangDTO.getChiTietDonHang() ) {
 			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
 			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(),chiTietDonHangDTO.getMabao()));
@@ -103,6 +113,9 @@ public class DonHangServiceImpl implements DonHangService {
 			chiTietDonHangs.add(chiTietDonHang);
 			
 		}
+		
+		
+		
 		chiTietDonHangRepository.saveAll(chiTietDonHangs);
 	}
 

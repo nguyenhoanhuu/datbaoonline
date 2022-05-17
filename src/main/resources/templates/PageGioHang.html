@@ -141,7 +141,7 @@
 			var datbao= {
 			        "maKhachHang": 20,
 			        "tenKhachHang": "Lê Quang Long",
-			        "maKhuyenMai": 3,
+			        "maKhuyenMai": 2,
 			        "tenKhuyenMai": "Lễ 30/4",
 			        "ngayTaoDonHang": "2022-12-12T00:00:00",
 			        "trangThaiDonHang": "122",
@@ -154,13 +154,12 @@
 
 			$('.checkbox_baoId:checked').each(function(index, ele) {
 				var parent = $(ele).parents('tr');
-
 				var chiTietDonHang = {
 	                "mabao": parent.find('td[name="baoId"]').text(),
 	                "tenBao": parent.find('td[name="tenBao"]').text(),
 	                "ngayDatBao": parent.find('input[name="ngayDatBao"]').val(),
 	                "ngatKetThucDatBao": parent.find('input[name="ngayKetThucDatBao"]').val(),
-	                "soLuong": parent.find('td[name="soLuong"]').text(),
+	                "soLuong": parent.find('input[name="soLuong"]').text(),
 	                "soKy": parent.find('td[name="soKy"]').text(),
 	                "donGia": parent.find('td[name="donGia"]').text(),
 	                "thanhTien": parent.find('td[name="thanhTien"]').text(),

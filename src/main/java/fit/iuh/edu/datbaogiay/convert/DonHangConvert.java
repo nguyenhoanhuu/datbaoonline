@@ -28,6 +28,7 @@ public class DonHangConvert {
 	private KhuyenMaiService khuyenMaiService;
 	@Autowired
 	private ChiTietDonHangConvert chiTietDonHangConvert;
+	private double tongThanhTien;
 
 	public DonHang chuyendonHangEntity(DonHangDTO donHangDTO) {
 
@@ -58,8 +59,15 @@ public class DonHangConvert {
 	}
 
 	public DonHangDTO chuyendonHangDTO(DonHang donHang) {
-		DonHangDTO donHangDTO = DonHangDTO.builder()
-				.maKhachHang(donHang.getKhachHang().getid())
+		tongThanhTien = 0;
+		donHang.getChiTietDonHang().forEach(a -> {
+			ChiTietDonHangDTO chiTietDonHangDTO = chiTietDonHangConvert.chuyenChiTietDonHangDto(a);
+			tongThanhTien += chiTietDonHangDTO.getThanhTien();
+		}
+
+		);
+
+		DonHangDTO donHangDTO = DonHangDTO.builder().maKhachHang(donHang.getKhachHang().getid())
 				.tenKhachHang(donHang.getKhachHang().getHoTen())
 				.SDT(donHang.getKhachHang().getSDT())
 				.maKhuyenMai(donHang.getKhuyenMai().getid())
@@ -67,14 +75,14 @@ public class DonHangConvert {
 				.ngayTaoDonHang(donHang.getNgayTaoDonHang())
 				.trangThaiDonHang(donHang.getTrangThaiDonHang())
 				.diaChiNhanHang(donHang.getDiaChiNhanHang())
-				.tongTienDonHang(donHang.getTongTienDonHang())
+				.tongTienDonHang(tongThanhTien - donHang.getKhuyenMai().getGiaTriGiam())
 				.hinhThucThanhToan(donHang.getHinhThucThanhToan())
 				.build();
-		
+
 		if (donHang.getid() != 0) {
 			donHangDTO.setId(donHang.getid());
 		}
-		
+
 		Set<ChiTietDonHangDTO> chiTietDonHangDTOs = new HashSet<ChiTietDonHangDTO>();
 		donHang.getChiTietDonHang().forEach(a -> {
 			chiTietDonHangDTOs.add(chiTietDonHangConvert.chuyenChiTietDonHangDto(a));
