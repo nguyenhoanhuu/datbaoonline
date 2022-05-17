@@ -19,7 +19,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "nhan_vien")
 public class NhanVien {

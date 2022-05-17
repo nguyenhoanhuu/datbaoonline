@@ -13,9 +13,8 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-	<style type="text/css">
-	
-	* {
+<style type="text/css">
+* {
     margin: 0px auto;
   
 }
@@ -125,7 +124,53 @@ nav span ul li {
 .btn-thembao :hover{
     background-color: #17a2b8;
 }
-	</style>
+
+.item{
+    width: 160px;
+    height: fit-content;
+    position: relative;
+}
+
+.item1{
+    position: relative;
+}
+.add_bao {
+    box-sizing: border-box;
+    width: 1140px;
+    min-height: 400px;
+    margin: 0 auto;
+    padding: 5px;
+    background: #EBFAFE;
+}
+
+.bao {
+    box-sizing: content-box;
+    width: inherit;
+    height: 250px;
+    padding: 50px;
+    float: left;
+    display: flex;
+
+}
+
+.picture_product {
+    margin: 0px;
+}
+
+.picture_product img {
+    width: 200px;
+    height: 250px;
+}
+
+.infor_product {
+    margin: 0px 0px 0px 70px;
+
+}
+
+.infor_product .infor {
+    padding-top: 20px;
+}
+</style>	
 <title>Document</title>
 </head>
 <body>
@@ -150,7 +195,7 @@ nav span ul li {
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				href="PageQuanLyDoanhThu.html">Doanh thu</a></li>
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/donHang/show}">Hoá
+			<li id="nav-header-li"><a id="123" href="PageQuanLyHoaDon.html">Hoá
 					đơn</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/khachHang/show}">Khách hàng</a></li>
@@ -160,44 +205,34 @@ nav span ul li {
 	</div>
 	<br>
 	<br>
-	<div class="btn-thembao">
-		<a th:href="@{/admin/khuyenMai/put}" class="btn-thembao-a " >Thêm Khuyến Mãi</a>
-	</div>
-	<br>
-	<table class="table table-hover ">
-		<thead>
-			<tr class="bg-info">
-				<th scope="col">#</th>
-				<th scope="col">Mã khuyến mãi</th>
-				<th scope="col">Tên khuyến mãi</th>
-				<th scope="col">Ngày bắt đầu</th>
-				<th scope="col">Ngày hết hạn</th>
-				<th scope="col">Giá trị giảm</th>
-				<th scope="col">Người tạo</th>
-				<th scope="col">Xoá</th>
-				<th scope="col">Sửa</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="tempKhuyenMai : ${khuyenMai}">
 
-				<th></th>
-				<th th:text="${tempKhuyenMai.id}" scope="row">
-				<th th:text="${tempKhuyenMai.tenKhuyenMai}" scope="row">
-				<th th:text="${tempKhuyenMai.ngayBatDau}" scope="row">
-				<th th:text="${tempKhuyenMai.ngayHetHan}" scope="row">
-				<th th:text="${tempKhuyenMai.giaTriGiam}" scope="row">
-				<th th:text="${tempKhuyenMai.tenNhanVien}" scope="row"><th:hidden
-						th:text="${tempKhuyenMai.maNhanVien}" scope="row">
+		<form class="add_bao" th:object="${bao}" th:action="@{/admin/bao/addbao}" method="POST">
+            <div class="KhuyenMai">
+                <div class="infor_product">
+                    <div class="infor">
+                    	<input th:field="*{id}" type="hidden" name="txtid" id="txtid">
 
+                        <label for="txtName" style="padding-right: 30px;">Tên báo :</label>
+                        <input th:field="*{tenBao}" type="text" name="txtName" id="txtName">
+                    </div>
+                    <div class="infor" >
+                    <label for="txtstartday" style="padding-right: 25px;">Hình Ảnh:</label>
+					<input type="text" id="txtstartday1" th:field="*{hinhAnh}"><br><br>
 
-						<td>
-							<a th:href="@{__${tempKhuyenMai.id}__}">Xóa</a>
-						</td>
-
-						<td><a th:href="@{put/__${tempKhuyenMai.id}__}">Sửa</a></td>
-			</tr>
-		</tbody>
-	</table>
+                    <label for="txtendday" style="padding-right: 34px;">Đơn Giá:</label>
+					<input type="text" id="txtendday1" th:field="*{donGia}">	
+                </div>
+                <div class="infor">
+                    <label for="txtdescrip" style="padding-right: 47px;">Mô Tả:</label>
+                    <input th:field="*{moTa}" type="text" name="txtdescrip" id="txtdescrip">
+                </div>
+  
+                <div class="submit">
+                    <button id="button_order" type="submit"
+                        onclick="confirm_form()" style="border-radius: 20%; height: 30px;" ><p>thêm</p></button>
+                </div>
+            </div>
+        </div>
+		</form>
 </body>
 </html>
