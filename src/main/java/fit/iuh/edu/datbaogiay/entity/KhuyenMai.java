@@ -107,6 +107,11 @@ public class KhuyenMai {
 		this.nhanVien = nhanVien;
 	}
 
+	public KhuyenMai(int id) {
+		super();
+		this.id = id;
+	}
+
 	public KhuyenMai() {
 		super();
 	}

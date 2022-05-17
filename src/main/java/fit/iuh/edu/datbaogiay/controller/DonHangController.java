@@ -48,14 +48,14 @@ public class DonHangController {
 		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
 		return "PageChiTietDonHang";
 	}
-	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {
-		return donHangService.luuDonHang(donHangDTO);
-	}
-	@PutMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
-		return donHangService.luuDonHang(donHangDTO);
-	}
+//	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
+//	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {
+//		return donHangService.luuDonHang(donHangDTO);
+//	}
+//	@PutMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
+//	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
+//		return donHangService.luuDonHang(donHangDTO);
+//	}
 	@DeleteMapping("/donhang/{madonhang}")
 	public String xoaDonHang(@PathVariable int  madonhang) {
 		return donHangService.xoaDonHang(madonhang);

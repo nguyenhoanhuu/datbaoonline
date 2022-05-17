@@ -1,6 +1,6 @@
 package fit.iuh.edu.datbaogiay.dto;
 
-import java.time.LocalDateTime;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -20,9 +20,8 @@ public class ChiTietDonHangDTO {
 	private int madonHang;
 	private int mabao;
 	private String tenBao;
-	private double dongia;
-	private LocalDateTime ngayDatBao;
-	private LocalDateTime ngatKetThucDatBao;
+	private Date ngayDatBao;
+	private Date ngatKetThucDatBao;
 	private double donGia;
 	private int soLuong;
 	private int soKy;

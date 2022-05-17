@@ -3,27 +3,27 @@ package fit.iuh.edu.datbaogiay.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ChiTietDonHangPk implements Serializable {
-	private DonHang donHang;
-	private Bao bao;
-
-	public ChiTietDonHangPk(DonHang donHang, Bao bao) {
-		this.donHang = donHang;
-		this.bao = bao;
+	@Column(name = "don_hang_id", nullable = false)
+	private int donHangId;
+	@Column(name = "bao_id", nullable = false)
+	private int baoId;
+	public ChiTietDonHangPk(int donHangId, int baoId) {
+		super();
+		this.donHangId = donHangId;
+		this.baoId = baoId;
 	}
-	
 	public ChiTietDonHangPk() {
 		super();
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(bao, donHang);
+		return Objects.hash(baoId, donHangId);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -33,7 +33,9 @@ public class ChiTietDonHangPk implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ChiTietDonHangPk other = (ChiTietDonHangPk) obj;
-		return Objects.equals(bao, other.bao) && Objects.equals(donHang, other.donHang);
+		return baoId == other.baoId && donHangId == other.donHangId;
 	}
-	
+
+
+
 }

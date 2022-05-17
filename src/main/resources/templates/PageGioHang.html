@@ -63,25 +63,31 @@
 								<tr data-toggle="collapse" data-target="#collapseOne"
 									aria-expanded="true" aria-controls="collapseOne"
 									th:each="todoitem : ${giohangId.chiTietGioHang}">
-									<th scope="row"><input type="checkbox"
+									<td th:text="${todoitem.baoId}" name="baoId"></td>
+
+									<td scope="row"><input type="checkbox"
 										th:value="${todoitem.baoId} + '-' + ${todoitem.gioHangId}"
-										class="checkbox_baoId"></th>
-									<td th:text="${todoitem.tenBao}"></td>
-									<td><input type="text" name="" id=""
+										class="checkbox_baoId"></td>
+									<td th:text="${todoitem.tenBao}" name="tenBao"></td>
+
+									<td><input type="text" name="ngayDatBao"
 										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngayDatBao, 'dd-MM-yyyy')}"><input
+										th:value="${#dates.format(todoitem.ngayDatBao, 'yyyy-MM-dd')}"><input
 										type="hidden" th:value=${todoitem.baoId} id="txtId"></td>
 
-									<td><input type="text" name="" id=""
+									<td><input type="text" name="ngayKetThucDatBao"
 										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngaytKetThucDatBao, 'dd-MM-yyyy')}">
+										th:value="${#dates.format(todoitem.ngaytKetThucDatBao, 'yyyy-MM-dd')}">
 									</td>
-									<td th:text="${todoitem.soKy}"></td>
+
+									<td th:text="${todoitem.soKy}" name="soKy"></td>
+
 									<td><input type="number"
 										style="width: 50px; text-align: center" value="1"
-										th:value="${todoitem.soLuong}"></td>
-									<td th:text="${todoitem.donGia}"></td>
-									<td th:text="${todoitem.thanhTien}"></td>
+										th:value="${todoitem.soLuong}" name="soLuong"></td>
+									<td th:text="${todoitem.donGia}" name="donGia"></td>
+
+									<td th:text="${todoitem.thanhTien}" name="thanhTien"></td>
 									<td>
 										<Button
 											th:onclick="'confirm_form_delete(event, ' + ${todoitem.baoId} + ', ' + ${todoitem.gioHangId} + ')'">
@@ -123,9 +129,58 @@
       		});
 			}
 		function mua_bao() {
+			var laycheckbox=document.getElementsByClassName("checkbox_baoId");
+			 var result = "";
+			for(var i=0;i<laycheckbox.length;i++) {
+				if(laycheckbox[i].checked==true) {
+					result += ' [' + laycheckbox[i].value + ']';
+					
+					}
+				}
+
 			var datbao= {
-					th:value="${todoitem.baoId} + '-' + ${todoitem.gioHangId}"
-				};
+			        "maKhachHang": 20,
+			        "tenKhachHang": "Lê Quang Long",
+			        "maKhuyenMai": 3,
+			        "tenKhuyenMai": "Lễ 30/4",
+			        "ngayTaoDonHang": "2022-12-12T00:00:00",
+			        "trangThaiDonHang": "122",
+			        "diaChiNhanHang": "1212",
+			        "tongTienDonHang": "12121.0",
+			        "hinhThucThanhToan": "12",
+			        "chiTietDonHang": [],
+			        "sdt": "0968195728"
+		}
+
+			$('.checkbox_baoId:checked').each(function(index, ele) {
+				var parent = $(ele).parents('tr');
+
+				var chiTietDonHang = {
+	                "mabao": parent.find('td[name="baoId"]').text(),
+	                "tenBao": parent.find('td[name="tenBao"]').text(),
+	                "ngayDatBao": parent.find('input[name="ngayDatBao"]').val(),
+	                "ngatKetThucDatBao": parent.find('input[name="ngayKetThucDatBao"]').val(),
+	                "soLuong": parent.find('td[name="soLuong"]').text(),
+	                "soKy": parent.find('td[name="soKy"]').text(),
+	                "donGia": parent.find('td[name="donGia"]').text(),
+	                "thanhTien": parent.find('td[name="thanhTien"]').text(),
+
+	   	            }
+
+				datbao.chiTietDonHang.push(chiTietDonHang);	
+				
+				
+			});
+			$.ajax({
+	      		  type: "POST",
+	      		  url: '../donhang2',
+	      		  contentType: 'application/json; charset=utf-8',
+	      		  data: JSON.stringify(datbao),
+	      		  success: function( data ) {
+	      			alert( " thành công: " + data );
+	          	  },
+	      		});		
+				console.log(datbao);
 		}
 			
 			

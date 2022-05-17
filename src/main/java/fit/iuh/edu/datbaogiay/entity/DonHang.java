@@ -2,13 +2,12 @@ package fit.iuh.edu.datbaogiay.entity;
 
 
 import java.time.LocalDateTime;
-
-
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +49,7 @@ public class DonHang {
 	@Column(name = "hinh_thuc_thanh_toan")
 	private String hinhThucThanhToan;
 	// mapping
-	@OneToMany(mappedBy = "donHang",cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy = "donHang",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<ChiTietDonHang> chiTietDonHang;
 	
 	public int getid() {

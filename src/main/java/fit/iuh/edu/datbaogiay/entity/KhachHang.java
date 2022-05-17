@@ -53,6 +53,11 @@ public class KhachHang {
 		super();
 	}
 
+	public KhachHang(int id) {
+		super();
+		this.id = id;
+	}
+
 	public KhachHang(int id, String hoTen, String email, String sDT, String matKhau) {
 		super();
 		this.id = id;
