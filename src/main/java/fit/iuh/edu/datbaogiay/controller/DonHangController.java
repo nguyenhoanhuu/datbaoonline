@@ -26,6 +26,7 @@ import fit.iuh.edu.datbaogiay.service.DonHangService;
 public class DonHangController {
 
 	private DonHangService donHangService;
+	private static double tongtien;
 
 	public DonHangController(DonHangService donHangService) {
 		super();
@@ -48,16 +49,39 @@ public class DonHangController {
 		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
 		return "PageChiTietDonHang";
 	}
-//	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-//	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {
-//		return donHangService.luuDonHang(donHangDTO);
-//	}
-//	@PutMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-//	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
-//		return donHangService.luuDonHang(donHangDTO);
-//	}
+
+	@GetMapping("/doanhThu/put/{madonhang}")
+	public String layDonHangTheoId1(@PathVariable int  madonhang,Model model) {
+		
+		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(madonhang);
+		model.addAttribute("donhang", donHangDTO);
+		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
+		return "PageChiTietDonHang";
+	}
+	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
+	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {
+		return donHangService.luuDonHang(donHangDTO);
+	}
+	@PutMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
+	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
+		return donHangService.luuDonHang(donHangDTO);
+	}
+
 	@DeleteMapping("/donhang/{madonhang}")
 	public String xoaDonHang(@PathVariable int  madonhang) {
 		return donHangService.xoaDonHang(madonhang);
+	}
+	
+	@GetMapping(value = "/doanhThu/show", consumes = MediaType.ALL_VALUE)
+	public String layDSDonHang1(Model model){
+		tongtien = 0;
+		List<DonHangDTO>  donHangDTOs =  donHangService.layDSDonHang();
+		donHangDTOs.forEach(donhang->{
+			tongtien+=donhang.getTongTienDonHang();
+		});
+		model.addAttribute("tongtien", tongtien);
+		model.addAttribute("dsDonHang", donHangDTOs);
+		return "PageQuanLyDoanhThu";
+		
 	}
 }

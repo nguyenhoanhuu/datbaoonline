@@ -69,6 +69,7 @@ public class DonHangConvert {
 				.diaChiNhanHang(donHang.getDiaChiNhanHang())
 				.tongTienDonHang(donHang.getTongTienDonHang())
 				.hinhThucThanhToan(donHang.getHinhThucThanhToan())
+				.giaTriGiam(donHang.getKhuyenMai().getGiaTriGiam())
 				.build();
 		
 		if (donHang.getid() != 0) {

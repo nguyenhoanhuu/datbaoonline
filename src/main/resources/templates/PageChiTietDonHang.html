@@ -181,11 +181,11 @@ nav span ul li {
     </div>
 	<div class="nav-header">
 		<ul class="nav-header-ul">
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/bao}">Sản
+			<li id="nav-header-li"><a id="123" th:href="@{/admin/bao/show}">Sản
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
-				href="PageQuanLyDoanhThu.html">Doanh thu</a></li>
-			<li id="nav-header-li"><a id="123" href="PageQuanLyHoaDon.html">Hoá
+				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
+			<li id="nav-header-li"><a id="123" th:href="@{/admin/donHang/show}">Hoá
 					đơn</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/khachHang/show}">Khách hàng</a></li>
@@ -211,16 +211,16 @@ nav span ul li {
         </thead>
         <tbody>
           <tr th:each="chitiet : ${chitietdonhang}">
-            <th scope="row">1</th>
-            <th th:text=${chitiet.madonHang}></th>
-			<th th:text=${chitiet.mabao}></th>
-			<th th:text=${chitiet.ngayDatBao}></th>
-			<th th:text=${chitiet.ngatKetThucDatBao}></th>
-			<th th:text=${chitiet.soLuong}></th>
-			<th th:text=${chitiet.soKy}></th>
+            <td scope="row">1</th>
+            <td th:text=${chitiet.madonHang}></td>
+			<td th:text=${chitiet.mabao}></td>
+			<td th:text=${chitiet.ngayDatBao}></td>
+			<td th:text=${chitiet.ngatKetThucDatBao}></td>
+			<td th:text=${chitiet.soLuong}></td>
+			<td th:text=${chitiet.soKy}></td>
 		
-            <td th:text="${chitiet.thanhTien}"></td>
-            <td></td>
+            <td th:text="${#numbers.formatCurrency(chitiet.thanhTien)}"></td>
+      
         </tr>
 
 
