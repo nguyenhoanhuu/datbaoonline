@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "chi_tiet_don_hang")
 @IdClass(ChiTietDonHangPk.class)

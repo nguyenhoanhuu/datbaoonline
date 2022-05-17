@@ -21,7 +21,6 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-@Data
 @Entity
 @Table(name = "khuyen_mai")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

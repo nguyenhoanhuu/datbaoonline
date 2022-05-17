@@ -4,6 +4,8 @@ package fit.iuh.edu.datbaogiay.controller;
 import java.util.List;
 
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fit.iuh.edu.datbaogiay.dto.DonHangDTO;
+import fit.iuh.edu.datbaogiay.dto.KhuyenMaiDto;
 import fit.iuh.edu.datbaogiay.entity.Bao;
 import fit.iuh.edu.datbaogiay.entity.DonHang;
 import fit.iuh.edu.datbaogiay.service.DonHangService;
 
-@RestController
-@RequestMapping("/api")
+@Controller
+@RequestMapping("/admin/donHang")
 public class DonHangController {
 
 	private DonHangService donHangService;
@@ -29,14 +32,21 @@ public class DonHangController {
 		this.donHangService = donHangService;
 	}
 	
-	@GetMapping("/donhang")
-	public List<DonHangDTO> layDSDonHang(){
+	@GetMapping(value = "/show", consumes = MediaType.ALL_VALUE)
+	public String layDSDonHang(Model model){
 		
-		return donHangService.layDSDonHang();
+		List<DonHangDTO>  donHangDTOs =  donHangService.layDSDonHang();
+		model.addAttribute("dsDonHang", donHangDTOs);
+		return "PageQuanLyHoaDon";
+		
 	}
-	@GetMapping("/donhang/{madonhang}")
-	public DonHangDTO layDonHangTheoId(@PathVariable int  madonhang) {
-		return donHangService.layDonHangTheoId(madonhang);
+	@GetMapping("/put/{madonhang}")
+	public String layDonHangTheoId(@PathVariable int  madonhang,Model model) {
+		
+		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(madonhang);
+		model.addAttribute("donhang", donHangDTO);
+		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
+		return "PageChiTietDonHang";
 	}
 	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
 	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {

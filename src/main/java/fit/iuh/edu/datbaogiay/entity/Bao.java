@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "bao")
 public class Bao {
