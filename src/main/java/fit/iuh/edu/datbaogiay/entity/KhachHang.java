@@ -1,116 +1,88 @@
 package fit.iuh.edu.datbaogiay.entity;
 
-import java.io.Serializable;
-
-
-import java.util.Set;
-import java.util.UUID;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import lombok.Data;
 
 @Entity
 @Table(name = "khach_hang")
-
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class KhachHang {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, nullable = false)
-	private int id;
-	@Column(name = "ho_ten",columnDefinition = "nvarchar(100)")
-	private String hoTen;
-	@Column(nullable = false)
-	private String email;
-	@Column(name = "sdt")
-	private String SDT;
-	@Column(name = "mat_khau")
-	private String matKhau;
-	// mapping
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
+  private int id;
 
-	@OneToMany(mappedBy = "khachHang",cascade = {CascadeType.MERGE})
-	private Set<DonHang> dsHoaDon;
+  @Column(name = "ho_ten", columnDefinition = "nvarchar(100)")
+  private String hoTen;
 
-	@OneToOne(cascade = {CascadeType.MERGE})
-	@PrimaryKeyJoinColumn
-	private GioHang gioHang;
-	public KhachHang() {
-		super();
-	}
+  @Column(name = "sdt")
+  private String SDT;
+  // mapping
 
-	public KhachHang(int id) {
-		super();
-		this.id = id;
-	}
+  //	@OneToMany(mappedBy = "khachHang",cascade = {CascadeType.MERGE})
+  //	private Set<DonHang> dsHoaDon;
 
-	public KhachHang(int id, String hoTen, String email, String sDT, String matKhau) {
-		super();
-		this.id = id;
-		this.hoTen = hoTen;
-		this.email = email;
-		SDT = sDT;
-		this.matKhau = matKhau;
-	}
+  @OneToOne(cascade = {CascadeType.MERGE})
+  @PrimaryKeyJoinColumn
+  private GioHang gioHang;
 
-	public int getid() {
-		return id;
-	}
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "users_id", referencedColumnName = "id")
+  private Users users;
+  
+  public KhachHang() {}
 
-	public void setid(int id) {
-		this.id = id;
-	}
+  public KhachHang(int id) {
+    this.id = id;
+  }
 
-	public String getHoTen() {
-		return hoTen;
-	}
+  public KhachHang(int id, String hoTen, String sDT, GioHang gioHang, Users users) {
+    this.id = id;
+    this.hoTen = hoTen;
+    this.SDT = sDT;
+    this.gioHang = gioHang;
+    this.users = users;
+  }
 
-	public void setHoTen(String hoTen) {
-		this.hoTen = hoTen;
-	}
+  public int getid() {
+    return id;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public void setid(int id) {
+    this.id = id;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public String getHoTen() {
+    return hoTen;
+  }
 
-	public String getSDT() {
-		return SDT;
-	}
+  public void setHoTen(String hoTen) {
+    this.hoTen = hoTen;
+  }
 
-	public void setSDT(String sDT) {
-		SDT = sDT;
-	}
+  public Users getUsers() {
+    return users;
+  }
 
-	public String getMatKhau() {
-		return matKhau;
-	}
+  public void setUsers(Users users) {
+    this.users = users;
+  }
 
-	public void setMatKhau(String matKhau) {
-		this.matKhau = matKhau;
-	}
+  public String getSDT() {
+    return SDT;
+  }
 
-	@Override
-	public String toString() {
-		return "KhachHang [id=" + id + ", hoTen=" + hoTen + ", email=" + email + ", SDT=" + SDT
-				+ ", matKhau=" + matKhau + "]";
-	}
-
+  public void setSDT(String sDT) {
+    SDT = sDT;
+  }
 }

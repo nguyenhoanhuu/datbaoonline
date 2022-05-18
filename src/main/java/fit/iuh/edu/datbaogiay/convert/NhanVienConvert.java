@@ -17,8 +17,8 @@ public class NhanVienConvert {
 		nhanVien.setTenNhanVien(nhanVienDto.getTenNhanVien());
 		nhanVien.setSDT(nhanVienDto.getSDT());
 		nhanVien.setDiaChi(nhanVienDto.getDiaChi());
-		nhanVien.setEmail(nhanVienDto.getEmail());
-		nhanVien.setMatKhau(nhanVienDto.getMatKhau());
+//		nhanVien.setEmail(nhanVienDto.getEmail());
+//		nhanVien.setMatKhau(nhanVienDto.getMatKhau());
 	
 		
 		return nhanVien;
@@ -34,8 +34,8 @@ public class NhanVienConvert {
 		nhanVienDto.setTenNhanVien(nhanVien.getTenNhanVien());
 		nhanVienDto.setSDT(nhanVien.getSDT());
 		nhanVienDto.setDiaChi(nhanVien.getDiaChi());
-		nhanVienDto.setEmail(nhanVien.getEmail());
-		nhanVienDto.setMatKhau(nhanVien.getMatKhau());
+//		nhanVienDto.setEmail(nhanVien.getEmail());
+//		nhanVienDto.setMatKhau(nhanVien.getMatKhau());
 		return nhanVienDto;
 	}
 }
