@@ -105,5 +105,14 @@ public class DonHangServiceImpl implements DonHangService {
 		}
 		chiTietDonHangRepository.saveAll(chiTietDonHangs);
 	}
-
+	@Override
+    public List<DonHangDTO> finddonhang(int year,int month,int day ) {
+        List<DonHangDTO> donHangDTOs = new ArrayList<DonHangDTO>();
+        List<DonHang> donHangs = donHangRepository.findAllByNgayTaoDonHang_YearAndNgayTaoDonHang_MonthAndNgayTaoDonHang_DayOfMonth(year, month, day);
+        for (DonHang donHang : donHangs) {
+            DonHangDTO donHangDto = donHangConvert.chuyendonHangDTO(donHang);
+            donHangDTOs.add(donHangDto);
+        }
+        return donHangDTOs;
+    }
 }

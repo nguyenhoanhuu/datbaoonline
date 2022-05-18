@@ -2,6 +2,7 @@ package fit.iuh.edu.datbaogiay.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class DonHang {
 	private KhuyenMai khuyenMai;
 
 	@Column(name = "ngay_tao_don_hang")
-	private LocalDateTime ngayTaoDonHang;
+	private Date ngayTaoDonHang;
 	
 	@Column(name = "trang_thai_don_hang",columnDefinition = "nvarchar(100)")
 	private String trangThaiDonHang;
@@ -70,10 +71,10 @@ public class DonHang {
 	public void setKhuyenMai(KhuyenMai khuyenMai) {
 		this.khuyenMai = khuyenMai;
 	}
-	public LocalDateTime getNgayTaoDonHang() {
+	public Date getNgayTaoDonHang() {
 		return ngayTaoDonHang;
 	}
-	public void setNgayTaoDonHang(LocalDateTime ngayTaoDonHang) {
+	public void setNgayTaoDonHang(Date ngayTaoDonHang) {
 		this.ngayTaoDonHang = ngayTaoDonHang;
 	}
 	public String getTrangThaiDonHang() {
@@ -106,7 +107,7 @@ public class DonHang {
 	public void setChiTietDonHang(Set<ChiTietDonHang> chiTietDonHang) {
 		this.chiTietDonHang = chiTietDonHang;
 	}
-	public DonHang(KhachHang khachHang, KhuyenMai khuyenMai, LocalDateTime ngayTaoDonHang, String trangThaiDonHang,
+	public DonHang(KhachHang khachHang, KhuyenMai khuyenMai, Date ngayTaoDonHang, String trangThaiDonHang,
 			String diaChiNhanHang, double tongTienDonHang, String hinhThucThanhToan,
 			Set<ChiTietDonHang> chiTietDonHang) {
 		super();

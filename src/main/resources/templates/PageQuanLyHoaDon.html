@@ -62,7 +62,7 @@
             <td th:text=${tempDonHang.id}></td>
             <td th:text=${tempDonHang.tenKhachHang}></td>
 			<td th:text=${tempDonHang.maKhuyenMai}></td>
-			<td th:text=${tempDonHang.ngayTaoDonHang}></td>
+			<td th:text="${#dates.format(tempDonHang.ngayTaoDonHang, 'dd-MM-yyyy')}"></td>
 			<td th:text=${tempDonHang.diaChiNhanHang}></td>
 			<td th:text=${tempDonHang.hinhThucThanhToan}></td>
 			<td th:text=${tempDonHang.trangThaiDonHang}></td>
