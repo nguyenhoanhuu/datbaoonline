@@ -40,8 +40,6 @@
 	<section class="ftco-section">
 		<div class="container">
 	<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" >
-					<input class="input100" type="text" name="hoTen" placeholder="Họ tên" >
-					<input class="input100" type="text" name="SDT" placeholder="SĐT"  >
 					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ nhận hàng"  id="diachinhanbao">
 					<input class="input100" type="text"  placeholder="Nơi nhập khuyến mãi" >
 				</div>
@@ -52,6 +50,7 @@
 							<thead>
 								<tr>
 									<th>#</th>
+									<th>Chọn</th>
 									<th>Tên Sản Phẩm</th>
 									<th>Ngày bắt đầu</th>
 									<th>Ngày kết thúc</th>
@@ -113,8 +112,8 @@
 					<li>
 						<tr >
 							<td>
-								<a href="" th:onclick="mua_bao()"style="border: #333 solid;">Mua Báo</a>
-																<!-- <Button class="btn-ul-li-dathang" >Mua	báo</Button> -->
+								<!-- <a href="" th:onclick="mua_bao()"style="border: #333 solid;">Mua Báo</a> -->
+																 <Button class="btn-ul-li-dathang" th:onclick="mua_bao()">Mua báo</Button> 
 							</td>
 						</tr>
 					</li>
@@ -124,6 +123,15 @@
 	</section>
 
 	<script>
+	function GetTodayDate() {
+		   var today = new Date();
+		   var dd = String(today.getDate()).padStart(2, '0');
+		   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		   var yyyy = today.getFullYear();
+
+		   today= yyyy+'-'+mm+'-'+dd;
+		   return today;
+		}
 		function confirm_form_delete(event, baoId,gioHangId){
 			 var datbao = {
 					 "baoId": $('#txtId').val(),
@@ -154,10 +162,10 @@
 			        "tenKhachHang": "Lê Quang Long",
 			        "maKhuyenMai": 2,
 			        "tenKhuyenMai": "Lễ 30/4",
-			        "ngayTaoDonHang": "2022-12-12T00:00:00",
+			        "ngayTaoDonHang": GetTodayDate(),
 			        "trangThaiDonHang": "Chờ xử lý",
 			        "diaChiNhanHang": $('#diachinhanbao').val(),
-			        "tongTienDonHang": "12121.0",
+			      /*   "tongTienDonHang": "12121.0", */
 			        "hinhThucThanhToan": "Tại nhà",
 			        "chiTietDonHang": [],
 			       

@@ -34,10 +34,11 @@
 		<div class="container">
 			
 				<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" th:each="todoitem1 : ${donhang}">
-				<input class="input100" type="text" name="maHoaDon" placeholder="mahoadon" th:value="'Mã hoá đơn:' +${todoitem1.id}" disabled>
+				<input class="input100" type="text" name="maHoaDon" placeholder="mahoadon" th:value="'Mã đơn hàng:' +${todoitem1.id}" disabled>
 					<input class="input100" type="text" name="hoTen" placeholder="Họ tên" th:value="'Tên khách hàng:    '+ ${todoitem1.tenKhachHang}" disabled>
 					<input class="input100" type="text" name="SDT" placeholder="SĐT"  th:value="'Số điện thoại:       '+${todoitem1.SDT}" disabled>
 					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Địa chỉ nhận báo:  '+${todoitem1.diaChiNhanHang}" disabled>
+					<input class="input100" type="text" name="trangThai" placeholder="Trạng thái đơn hàng" th:value="'Trạng thái đơn hàng :  '+${todoitem1.trangThaiDonHang}" disabled>
 				</div>
 		
 			<div class="row">
@@ -70,8 +71,7 @@
 							  <td th:text="${todoitem.soKy}" name="soKy"></td>
 							  <td  th:text="${todoitem.soLuong}"></td>
 							  <td  th:text="${todoitem.donGia}"></td>
-							   <td  th:text="${todoitem.thanhTien}"></td>
-						     
+						     <td th:text="${#numbers.formatDecimal(todoitem.thanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
 						    </tr>
 
 						  </tbody>
@@ -96,17 +96,17 @@
 					<li>
 						<tr >Tổng tiền hàng: </tr>
 						<tr>......................</tr>
-						<tr > 300000</tr>
+						 <tr th:text="${#numbers.formatDecimal(todoitem2.tongThanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'"> </tr>
 					</li>
 					<li>
 						<tr>Khuyến mãi: </tr>
 						<tr>..........................</tr>
-						<td th:text="${todoitem2.giaTriGiam}"  >   </tr>
+						<tr th:text="${#numbers.formatDecimal(todoitem2.giaTriGiam, 0, 'COMMA', 0, 'POINT')}+ ' đ'"> </tr>
 					</li>
 					<li>
 						<tr>Tổng tiền thanh toán: </tr>
 						<tr>............</tr>
-						<tr th:text="${todoitem2.tongTienDonHang}" >  </tr>
+						<tr th:text="${#numbers.formatDecimal(todoitem2.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+ ' đ'"> </tr>
 					</li>
 				</ul>
 			</div>

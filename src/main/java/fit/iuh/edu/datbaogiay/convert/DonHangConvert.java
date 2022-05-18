@@ -59,7 +59,6 @@ public class DonHangConvert {
 	}
 
 	public DonHangDTO chuyendonHangDTO(DonHang donHang) {
-		tongThanhTien = 0;
 		donHang.getChiTietDonHang().forEach(a -> {
 			ChiTietDonHangDTO chiTietDonHangDTO = chiTietDonHangConvert.chuyenChiTietDonHangDto(a);
 			tongThanhTien += chiTietDonHangDTO.getThanhTien();
@@ -75,6 +74,7 @@ public class DonHangConvert {
 				.ngayTaoDonHang(donHang.getNgayTaoDonHang())
 				.trangThaiDonHang(donHang.getTrangThaiDonHang())
 				.diaChiNhanHang(donHang.getDiaChiNhanHang())
+				.tongThanhTien(tongThanhTien)
 				.tongTienDonHang(tongThanhTien - donHang.getKhuyenMai().getGiaTriGiam())
 				.hinhThucThanhToan(donHang.getHinhThucThanhToan())
 				.giaTriGiam(donHang.getKhuyenMai().getGiaTriGiam())

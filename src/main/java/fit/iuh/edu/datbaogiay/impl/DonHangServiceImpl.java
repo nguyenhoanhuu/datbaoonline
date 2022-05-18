@@ -83,8 +83,6 @@ public class DonHangServiceImpl implements DonHangService {
 	public void luuDonHang(DonHangDTO donHangDTO) {
 		
 		DonHang donHang = new DonHang();
-	
-		
 		donHang.setKhachHang(new KhachHang(donHangDTO.getMaKhachHang()));
 		donHang.setKhuyenMai(new KhuyenMai(donHangDTO.getMaKhuyenMai()));
 		donHang.setNgayTaoDonHang(donHangDTO.getNgayTaoDonHang());
@@ -103,7 +101,6 @@ public class DonHangServiceImpl implements DonHangService {
 			chiTietDonHang.setSoKy(chiTietDonHangDTO.getSoKy());
 			chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
 			chiTietDonHangs.add(chiTietDonHang);
-			
 		}
 		
 		
