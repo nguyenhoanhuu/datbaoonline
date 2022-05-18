@@ -23,7 +23,7 @@
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
-				<li><a href="./Dashboard.html"><i><img
+				<li><a th:href="@{/bao}"><i><img
 							src="../img/logo.jpg" alt=""></i></a></li>
 				<li><p>Xin chào đến với trang đặt báo giấy IUH</p></li>
 			</ul>
@@ -39,7 +39,12 @@
 	</div>
 	<section class="ftco-section">
 		<div class="container">
-
+	<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" >
+					<input class="input100" type="text" name="hoTen" placeholder="Họ tên" >
+					<input class="input100" type="text" name="SDT" placeholder="SĐT"  >
+					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ nhận hàng"  id="diachinhanbao">
+					<input class="input100" type="text"  placeholder="Nơi nhập khuyến mãi" >
+				</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="table-wrap">
@@ -89,9 +94,10 @@
 
 									<td th:text="${todoitem.thanhTien}" name="thanhTien"></td>
 									<td>
-										<Button
+										<Button 
 											th:onclick="'confirm_form_delete(event, ' + ${todoitem.baoId} + ', ' + ${todoitem.gioHangId} + ')'">
 											Xoá</Button>
+											
 									</td>
 								</tr>
 							</tbody>
@@ -103,10 +109,15 @@
 		<div class="handle-cart">
 			<div class="section-thanh-toan"></div>
 			<div class="article-thanhToan">
-				<ul id="article-ul-right">
-
-					<li><Button class="btn-ul-li-dathang" th:onclick="mua_bao()">Mua
-							báo</Button></li>
+				<ul id="article-ul-right">	
+					<li>
+						<tr >
+							<td>
+								<a href="" th:onclick="mua_bao()"style="border: #333 solid;">Mua Báo</a>
+																<!-- <Button class="btn-ul-li-dathang" >Mua	báo</Button> -->
+							</td>
+						</tr>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -116,7 +127,7 @@
 		function confirm_form_delete(event, baoId,gioHangId){
 			 var datbao = {
 					 "baoId": $('#txtId').val(),
-					 "gioHangId": 1  
+					 "gioHangId": 17  
 	            };
 			$.ajax({
       		  type: "POST",
@@ -144,12 +155,12 @@
 			        "maKhuyenMai": 2,
 			        "tenKhuyenMai": "Lễ 30/4",
 			        "ngayTaoDonHang": "2022-12-12T00:00:00",
-			        "trangThaiDonHang": "122",
-			        "diaChiNhanHang": "1212",
+			        "trangThaiDonHang": "Chờ xử lý",
+			        "diaChiNhanHang": $('#diachinhanbao').val(),
 			        "tongTienDonHang": "12121.0",
-			        "hinhThucThanhToan": "12",
+			        "hinhThucThanhToan": "Tại nhà",
 			        "chiTietDonHang": [],
-			        "sdt": "0968195728"
+			       
 		}
 
 			$('.checkbox_baoId:checked').each(function(index, ele) {
@@ -159,11 +170,10 @@
 	                "tenBao": parent.find('td[name="tenBao"]').text(),
 	                "ngayDatBao": parent.find('input[name="ngayDatBao"]').val(),
 	                "ngatKetThucDatBao": parent.find('input[name="ngayKetThucDatBao"]').val(),
-	                "soLuong": parent.find('input[name="soLuong"]').text(),
+	                "soLuong": parent.find('input[name="soLuong"]').val(),
 	                "soKy": parent.find('td[name="soKy"]').text(),
 	                "donGia": parent.find('td[name="donGia"]').text(),
 	                "thanhTien": parent.find('td[name="thanhTien"]').text(),
-
 	   	            }
 
 				datbao.chiTietDonHang.push(chiTietDonHang);	

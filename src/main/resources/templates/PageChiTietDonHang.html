@@ -219,7 +219,7 @@ nav span ul li {
 			<td th:text=${chitiet.soLuong}></td>
 			<td th:text=${chitiet.soKy}></td>
 		
-            <td th:text="${#numbers.formatCurrency(chitiet.thanhTien)}"></td>
+            <td th:text="${#numbers.formatDecimal(chitiet.thanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
       
         </tr>
 

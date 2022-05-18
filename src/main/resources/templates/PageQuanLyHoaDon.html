@@ -67,7 +67,7 @@
 			<td th:text=${tempDonHang.hinhThucThanhToan}></td>
 			<td th:text=${tempDonHang.trangThaiDonHang}></td>
             <td><a th:href="@{put/__${tempDonHang.id}__}">Xem chi tiết</a></td>
-			<td th:text="${#numbers.formatDecimal(tempDonHang.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}">
+			<td th:text="${#numbers.formatDecimal(tempDonHang.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
         </tr>
 
 

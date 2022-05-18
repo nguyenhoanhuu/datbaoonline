@@ -22,7 +22,7 @@ import fit.iuh.edu.datbaogiay.entity.DonHang;
 import fit.iuh.edu.datbaogiay.service.DonHangService;
 
 @Controller
-@RequestMapping("/admin/donHang")
+//@RequestMapping("/admin/donHang")
 public class DonHangController {
 
 	private DonHangService donHangService;
@@ -33,7 +33,7 @@ public class DonHangController {
 		this.donHangService = donHangService;
 	}
 	
-	@GetMapping(value = "/show", consumes = MediaType.ALL_VALUE)
+	@GetMapping(value = "/admin/donHang/show", consumes = MediaType.ALL_VALUE)
 	public String layDSDonHang(Model model){
 		
 		List<DonHangDTO>  donHangDTOs =  donHangService.layDSDonHang();
@@ -41,7 +41,7 @@ public class DonHangController {
 		return "PageQuanLyHoaDon";
 		
 	}
-	@GetMapping("/put/{madonhang}")
+	@GetMapping("/admin/donHang/put/{madonhang}")
 	public String layDonHangTheoId(@PathVariable int  madonhang,Model model) {
 		
 		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(madonhang);
@@ -50,7 +50,7 @@ public class DonHangController {
 		return "PageChiTietDonHang";
 	}
 
-	@GetMapping("/doanhThu/put/{madonhang}")
+	@GetMapping("/admin/donHang/doanhThu/put/{madonhang}")
 	public String layDonHangTheoId1(@PathVariable int  madonhang,Model model) {
 		
 		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(madonhang);
@@ -58,14 +58,14 @@ public class DonHangController {
 		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
 		return "PageChiTietDonHang";
 	}
-	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {
-		return donHangService.luuDonHang(donHangDTO);
-	}
-	@PutMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
-		return donHangService.luuDonHang(donHangDTO);
-	}
+//	@PostMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
+//	public DonHangDTO luuDonHang(@RequestBody DonHangDTO donHangDTO) {
+//		return donHangService.luuDonHang(donHangDTO);
+//	}
+//	@PutMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
+//	public DonHangDTO luuDonHang1(@RequestBody DonHangDTO donHangDTO) {
+//		return donHangService.luuDonHang(donHangDTO);
+//	}
 
 	@DeleteMapping("/donhang/{madonhang}")
 	public String xoaDonHang(@PathVariable int  madonhang) {
@@ -83,5 +83,14 @@ public class DonHangController {
 		model.addAttribute("dsDonHang", donHangDTOs);
 		return "PageQuanLyDoanhThu";
 		
+	}
+	
+	// trang tổng kết đơn hàng
+	@GetMapping("/tongdonhang/{madonhang}")
+	public String layVuaTaoDonHangTheoId(@PathVariable int  madonhang,Model model) {
+		
+		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(madonhang);
+		model.addAttribute("donhang", donHangDTO);
+		return "PageTongKetDonHang";
 	}
 }

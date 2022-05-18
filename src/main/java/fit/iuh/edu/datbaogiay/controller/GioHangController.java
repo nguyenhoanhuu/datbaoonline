@@ -40,6 +40,9 @@ public class GioHangController {
 		return gioHangService.xoaGioHang(gioHangId);
 	}
 	
+	
+	
+	
 	@GetMapping("/giohang/{gioHangId}")
 	public String layGioHangTheoID(@PathVariable int gioHangId , Model theModel) {
 		GioHangDto gioHangDtos=  gioHangService.layGioHangTheoId(gioHangId);

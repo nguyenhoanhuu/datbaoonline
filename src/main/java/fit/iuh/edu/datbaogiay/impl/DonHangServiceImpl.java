@@ -83,14 +83,7 @@ public class DonHangServiceImpl implements DonHangService {
 	public void luuDonHang(DonHangDTO donHangDTO) {
 		
 		DonHang donHang = new DonHang();
-		
-//		 tongThanhTien=0;
-//			donHang.getChiTietDonHang().forEach(a-> 
-//			{
-//				ChiTietDonHangDTO chiTietDonHangDTO= chiTietDonHangConvert.chuyenChiTietDonHangDto(a);
-//				tongThanhTien+= chiTietDonHangDTO.getThanhTien();
-//			
-//			}
+	
 		
 		donHang.setKhachHang(new KhachHang(donHangDTO.getMaKhachHang()));
 		donHang.setKhuyenMai(new KhuyenMai(donHangDTO.getMaKhuyenMai()));
@@ -102,7 +95,6 @@ public class DonHangServiceImpl implements DonHangService {
 		donHangRepository.save(donHang);
 
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
-		
 		for(ChiTietDonHangDTO chiTietDonHangDTO :donHangDTO.getChiTietDonHang() ) {
 			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
 			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(),chiTietDonHangDTO.getMabao()));
