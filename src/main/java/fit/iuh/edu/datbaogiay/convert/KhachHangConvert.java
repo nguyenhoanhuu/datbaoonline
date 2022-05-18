@@ -14,9 +14,9 @@ public class KhachHangConvert {
 		 }
 		 
 		 khachHang.setHoTen(khachHangDto.getTenKhachHang());
-		 khachHang.setEmail(khachHangDto.getEmail());
+//		 khachHang.setEmail(khachHangDto.getEmail());
 		 khachHang.setSDT(khachHangDto.getSDT());
-		 khachHang.setMatKhau(khachHangDto.getMatKhau());
+//		 khachHang.setMatKhau(khachHangDto.getMatKhau());
 
 		 return khachHang;
 		 
@@ -30,9 +30,9 @@ public class KhachHangConvert {
 		 }
 		 
 		 khachHangDto.setTenKhachHang(khachHang.getHoTen());
-		 khachHangDto.setEmail(khachHang.getEmail());
+//		 khachHangDto.setEmail(khachHang.getEmail());
 		 khachHangDto.setSDT(khachHang.getSDT());
-		 khachHangDto.setMatKhau(khachHang.getMatKhau());
+//		 khachHangDto.setMatKhau(khachHang.getMatKhau());
 		 
 		 return khachHangDto;
 	 }
