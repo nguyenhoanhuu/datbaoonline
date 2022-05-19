@@ -38,7 +38,13 @@
 		</ul>
 	</div>
    <br>
-  
+        <form th:object="${day}" th:action="@{/admin/donHang/test}" method="GET">
+      <input type="number" placeholder="ngay" min="0" max="31" th:field="*{ngay}">
+      <input type="number" placeholder="thang" min="1" max="12" th:field="*{thang}">
+      <input type="number" placeholder="nam" min="1999" max="2222" th:field="*{nam}">
+      <button id="button_order" type="submit" onclick="confirm_form()" style="border-radius: 20%; height: 30px;" ><p>tìm</p></button>
+    </form>
+    
    <br>
     <table class="table table-hover ">
         <thead>
@@ -46,6 +52,7 @@
             <th scope="col">#</th>
             <th scope="col">Mã hóa đơn</th>
             <th scope="col">Tên khách hàng</th>
+            <th scope="col">Ngày Tạo Hóa Đơn</th>
             <th scope="col">Danh sách sản phảm</th>
             <th scope="col">Giá trị giảm</th>
             <th scope="col">Tổng tiền</th>
@@ -56,9 +63,11 @@
             <th scope="row">1</th>
             <td th:text=${donhang.id}>HD4545</td>
             <td th:text=${donhang.tenKhachHang}>Hoàng Hoa Thuấn</td>
+            <td	th:text="${#dates.format(donhang.ngayTaoDonHang, 'dd-MM-yyyy')}"></td>
             <td><a th:href="@{put/__${donhang.id}__}">Xem chi tiết</a></td>  
-            <td th:text=${donhang.giaTriGiam}>100000</td>
-            <td th:text=${donhang.tongTienDonHang}>550000</td>
+            <td th:text="${#numbers.formatDecimal(donhang.giaTriGiam, 0, 'COMMA', 0, 'POINT')}+' đ'">100000</td>
+            <td th:text="${#numbers.formatDecimal(donhang.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+' đ'">550000</td>
+            
         </tr>
         <div class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -83,7 +92,7 @@
       </table>
       <br>
       <div class="btn-thembao">
-        <p class="btn-thembao-a ">Tổng doanh thu: <b  th:text="${tongtien}"></b></p> 
+        <p class="btn-thembao-a ">Tổng doanh thu: <b  th:text="${#numbers.formatDecimal(tongtien, 0, 'COMMA', 0, 'POINT')}+' đ'"></b></p> 
       </div>
 </body>
 </html>

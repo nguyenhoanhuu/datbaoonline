@@ -47,7 +47,7 @@ public class DonHang {
 	@Column(name = "tong_tien_don_hang")
 	private double tongTienDonHang;
 	
-	@Column(name = "hinh_thuc_thanh_toan")
+	@Column(name = "hinh_thuc_thanh_toan" ,columnDefinition = "nvarchar(100)")
 	private String hinhThucThanhToan;
 	// mapping
 	@OneToMany(mappedBy = "donHang",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)

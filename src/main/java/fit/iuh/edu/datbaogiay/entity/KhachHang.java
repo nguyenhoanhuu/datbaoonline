@@ -25,6 +25,9 @@ public class KhachHang {
   @Column(name = "ho_ten", columnDefinition = "nvarchar(100)")
   private String hoTen;
 
+  @Column(name = "email", columnDefinition = "nvarchar(100)")
+  private String email;
+
   @Column(name = "sdt")
   private String SDT;
   // mapping
@@ -85,4 +88,23 @@ public class KhachHang {
   public void setSDT(String sDT) {
     SDT = sDT;
   }
+
+public String getEmail() {
+	return email;
+}
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+public KhachHang(int id, String hoTen, String email, String sDT, GioHang gioHang, Users users) {
+	super();
+	this.id = id;
+	this.hoTen = hoTen;
+	this.email = email;
+	SDT = sDT;
+	this.gioHang = gioHang;
+	this.users = users;
+}
+  
 }

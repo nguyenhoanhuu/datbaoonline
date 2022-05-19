@@ -62,12 +62,12 @@
             <td th:text=${tempDonHang.id}></td>
             <td th:text=${tempDonHang.tenKhachHang}></td>
 			<td th:text=${tempDonHang.maKhuyenMai}></td>
-			<td th:text=${tempDonHang.ngayTaoDonHang}></td>
+			<td th:text="${#dates.format(tempDonHang.ngayTaoDonHang, 'dd-MM-yyyy')}"></td>
 			<td th:text=${tempDonHang.diaChiNhanHang}></td>
 			<td th:text=${tempDonHang.hinhThucThanhToan}></td>
 			<td th:text=${tempDonHang.trangThaiDonHang}></td>
             <td><a th:href="@{put/__${tempDonHang.id}__}">Xem chi tiết</a></td>
-			<td th:text="${#numbers.formatDecimal(tempDonHang.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
+			<td th:text="${#numbers.formatDecimal(tempDonHang.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+' đ'">
         </tr>
 
 
