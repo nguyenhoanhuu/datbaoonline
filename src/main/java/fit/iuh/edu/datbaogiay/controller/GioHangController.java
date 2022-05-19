@@ -1,5 +1,6 @@
 package fit.iuh.edu.datbaogiay.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fit.iuh.edu.datbaogiay.dto.GioHangDto;
+import fit.iuh.edu.datbaogiay.entity.Users;
 import fit.iuh.edu.datbaogiay.service.GioHangService;
+import fit.iuh.edu.datbaogiay.service.UsersService;
 @Controller
 public class GioHangController {
 	@Autowired
 	private GioHangService gioHangService;
-
+	@Autowired
+	private UsersService usersService;
 //	public GioHangController(GioHangService gioHangService) {
 //		super();
 //		this.gioHangService = gioHangService;
@@ -40,13 +44,11 @@ public class GioHangController {
 		return gioHangService.xoaGioHang(gioHangId);
 	}
 	
-	
-	
-	
 	@GetMapping("/giohang/{gioHangId}")
-	public String layGioHangTheoID(@PathVariable int gioHangId , Model theModel) {
+	public String layGioHangTheoID(@PathVariable int gioHangId , Model theModel, Principal principal) {
+		Users users = usersService.getByUsername(principal.getName());
 		GioHangDto gioHangDtos=  gioHangService.layGioHangTheoId(gioHangId);
-		
+		theModel.addAttribute("usersId", users.getId());
 		theModel.addAttribute("giohangId",gioHangDtos );
 		return "PageGioHang";
 	}

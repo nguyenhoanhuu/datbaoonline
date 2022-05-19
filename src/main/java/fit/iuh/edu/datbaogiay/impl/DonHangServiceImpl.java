@@ -40,6 +40,7 @@ public class DonHangServiceImpl implements DonHangService {
 	@Autowired
 	private BaoRepository baoRepository;
 	private double tongThanhTien;
+	
 	public DonHangServiceImpl(DonHangRepository donHangRepository) {
 		super();
 		this.donHangRepository = donHangRepository;
@@ -91,7 +92,7 @@ public class DonHangServiceImpl implements DonHangService {
 		donHang.setTongTienDonHang(donHangDTO.getTongTienDonHang());
 		donHang.setHinhThucThanhToan(donHangDTO.getHinhThucThanhToan());
 		donHangRepository.save(donHang);
-
+		
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
 		for(ChiTietDonHangDTO chiTietDonHangDTO :donHangDTO.getChiTietDonHang() ) {
 			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
@@ -102,6 +103,11 @@ public class DonHangServiceImpl implements DonHangService {
 			chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
 			chiTietDonHangs.add(chiTietDonHang);
 		}
+		
+		
+		
+	
+			
 		
 		
 		

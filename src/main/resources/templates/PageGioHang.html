@@ -20,29 +20,36 @@
 
 </head>
 <body>
+<input id="usersId" type="hidden" th:value="${usersId}" />
+	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
-				<li><a th:href="@{/bao}"><i><img
-							src="../img/logo.jpg" alt=""></i></a></li>
-				<li><p>Xin chào đến với trang đặt báo giấy IUH</p></li>
+				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+							alt=""></i></a></li>
+				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
+						IUH</p></li>
 			</ul>
 			<span>
 				<ul>
-					<li><a href="#"><i><img
-								src="../img/icon/akar-icons_cart.svg" alt=""></i>Giỏ hàng</a></li>
-					<li><a href="#"><i><img src="../img/icon/bx_user.svg"
-								alt=""></i>Đăng nhập</a></li>
+					<li><a sec:authorize="hasAuthority('CUSTOMER')"
+						class="menu-cart"
+						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
+					<li>Hi <i sec:authentication="name"></i>!
+					</li>
 				</ul>
 			</span>
 		</nav>
 	</div>
 	<section class="ftco-section">
 		<div class="container">
-	<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" >
-					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ nhận hàng"  id="diachinhanbao">
-					<input class="input100" type="text"  placeholder="Nơi nhập khuyến mãi" >
-				</div>
+			<div class="wrap-input100 validate-input m-b-16"
+				data-validate="Username is required">
+				<input class="input100" type="text" name="diaChi"
+					placeholder="Địa chỉ nhận hàng" id="diachinhanbao"> <input
+					class="input100" type="text" placeholder="Nơi nhập khuyến mãi">
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="table-wrap">
@@ -93,10 +100,10 @@
 
 									<td th:text="${todoitem.thanhTien}" name="thanhTien"></td>
 									<td>
-										<Button 
+										<Button
 											th:onclick="'confirm_form_delete(event, ' + ${todoitem.baoId} + ', ' + ${todoitem.gioHangId} + ')'">
 											Xoá</Button>
-											
+
 									</td>
 								</tr>
 							</tbody>
@@ -108,12 +115,13 @@
 		<div class="handle-cart">
 			<div class="section-thanh-toan"></div>
 			<div class="article-thanhToan">
-				<ul id="article-ul-right">	
+				<ul id="article-ul-right">
 					<li>
-						<tr >
+						<tr>
 							<td>
 								<!-- <a href="" th:onclick="mua_bao()"style="border: #333 solid;">Mua Báo</a> -->
-																 <Button class="btn-ul-li-dathang" th:onclick="mua_bao()">Mua báo</Button> 
+								<Button class="btn-ul-li-dathang" th:onclick="mua_bao()">Mua
+									báo</Button>
 							</td>
 						</tr>
 					</li>
@@ -132,10 +140,12 @@
 		   today= yyyy+'-'+mm+'-'+dd;
 		   return today;
 		}
+
+	
 		function confirm_form_delete(event, baoId,gioHangId){
 			 var datbao = {
 					 "baoId": $('#txtId').val(),
-					 "gioHangId": 1  
+					 "gioHangId": $('#gioHangId').val()
 	            };
 			$.ajax({
       		  type: "POST",
@@ -144,6 +154,8 @@
       		  data: JSON.stringify(datbao),
       		  success: function( data ) {
       			$(event.target).parents('tr').remove()
+      			
+      			
           	  },
       		});
 			}
@@ -153,15 +165,12 @@
 			for(var i=0;i<laycheckbox.length;i++) {
 				if(laycheckbox[i].checked==true) {
 					result += ' [' + laycheckbox[i].value + ']';
-					
 					}
 				}
 
 			var datbao= {
-			        "maKhachHang": 20,
-			        "tenKhachHang": "Lê Quang Long",
+			        "maKhachHang":  $('#usersId').val(),
 			        "maKhuyenMai": 2,
-			        "tenKhuyenMai": "Lễ 30/4",
 			        "ngayTaoDonHang": GetTodayDate(),
 			        "trangThaiDonHang": "Chờ xử lý",
 			        "diaChiNhanHang": $('#diachinhanbao').val(),

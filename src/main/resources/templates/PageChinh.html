@@ -11,8 +11,8 @@
 
 </head>
 <body>
-<input id="usersId" type="hidden" th:value="${usersId}" />
-    	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
+	<input id="usersId" type="hidden" th:value="${usersId}" />
+	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
@@ -24,14 +24,16 @@
 			<span>
 				<ul>
 					<li><a sec:authorize="hasAuthority('CUSTOMER')"
-						class="menu-cart" th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+						class="menu-cart"
+						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
 							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
-					<li>Hi <i sec:authentication="name"></i>!
+					<li>Hi <i sec:authentication="name" style="font-size: 20px"></i>!
 					</li>
 				</ul>
 			</span>
 		</nav>
 	</div>
+	
 	<div class="header-searchs-sort">
 		<div class="header-sort">
 			<div class="dropdown">
@@ -53,7 +55,8 @@
 			<div class="product-item">
 				<div class="product-top">
 					<a href="#" class="product-thumb"> <img
-						src="../img/baoyenbai.jpg" alt="">
+					th:src="${todoitem.hinhAnh}" style="width: 251px;height: 350px"
+						alt="">
 					</a>
 				</div>
 
