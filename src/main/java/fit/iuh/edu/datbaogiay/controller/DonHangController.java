@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fit.iuh.edu.datbaogiay.dto.DonHangDTO;
 import fit.iuh.edu.datbaogiay.dto.KhuyenMaiDto;
 import fit.iuh.edu.datbaogiay.entity.Bao;
+import fit.iuh.edu.datbaogiay.entity.Day;
 import fit.iuh.edu.datbaogiay.entity.DonHang;
 import fit.iuh.edu.datbaogiay.service.DonHangService;
 
@@ -27,7 +29,7 @@ public class DonHangController {
 
 	private DonHangService donHangService;
 	private static double tongtien;
-
+	private Day day;
 	public DonHangController(DonHangService donHangService) {
 		super();
 		this.donHangService = donHangService;
@@ -72,19 +74,31 @@ public class DonHangController {
 		return donHangService.xoaDonHang(madonhang);
 	}
 	
-	@GetMapping(value = "/doanhThu/show", consumes = MediaType.ALL_VALUE)
-	public String layDSDonHang1(Model model){
-		tongtien = 0;
-		List<DonHangDTO>  donHangDTOs =  donHangService.layDSDonHang();
-		donHangDTOs.forEach(donhang->{
-			tongtien+=donhang.getTongTienDonHang();
-		});
-		model.addAttribute("tongtien", tongtien);
-		model.addAttribute("dsDonHang", donHangDTOs);
-		return "PageQuanLyDoanhThu";
-		
+	@GetMapping(value = "/admin/donHang/doanhThu/show", consumes = MediaType.ALL_VALUE)
+		public String layDSDonHang1(Model model){
+			tongtien = 0;
+			List<DonHangDTO>  donHangDTOs =  donHangService.layDSDonHang();
+			donHangDTOs.forEach(donhang->{
+				tongtien+=donhang.getTongTienDonHang();
+			});
+			day = new Day();
+			model.addAttribute("tongtien", tongtien);
+			model.addAttribute("dsDonHang", donHangDTOs);
+			model.addAttribute("day", day);
+			return "PageQuanLyDoanhThu";
+			
 	}
-	
+	@GetMapping(value = "/admin/donHang/test", consumes = MediaType.ALL_VALUE)
+	public String test(@ModelAttribute("day") Day day,Model model) {
+		tongtien = 0;
+		 List<DonHangDTO> donHangDTOs = donHangService.finddonhang(day.getNam(),day.getThang(),day.getNgay());
+			donHangDTOs.forEach(donhang->{
+				tongtien+=donhang.getTongTienDonHang();
+			});
+			model.addAttribute("dsDonHang", donHangDTOs);
+			model.addAttribute("tongtien", tongtien);
+			return "PageQuanLyDoanhThu";
+	}
 	// trang tổng kết đơn hàng
 	@GetMapping("/tongdonhang/{madonhang}")
 	public String layVuaTaoDonHangTheoId(@PathVariable int  madonhang,Model model) {
