@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fit.iuh.edu.datbaogiay.dto.DonHangDTO;
 import fit.iuh.edu.datbaogiay.dto.GioHangDto;
+import fit.iuh.edu.datbaogiay.entity.DonHang;
 import fit.iuh.edu.datbaogiay.entity.Users;
+import fit.iuh.edu.datbaogiay.service.DonHangService;
 import fit.iuh.edu.datbaogiay.service.GioHangService;
 import fit.iuh.edu.datbaogiay.service.UsersService;
 @Controller
@@ -24,6 +27,8 @@ public class GioHangController {
 	private GioHangService gioHangService;
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private DonHangService donHangService;
 //	public GioHangController(GioHangService gioHangService) {
 //		super();
 //		this.gioHangService = gioHangService;
@@ -48,6 +53,7 @@ public class GioHangController {
 	public String layGioHangTheoID(@PathVariable int gioHangId , Model theModel, Principal principal) {
 		Users users = usersService.getByUsername(principal.getName());
 		GioHangDto gioHangDtos=  gioHangService.layGioHangTheoId(gioHangId);
+//		DonHangDTO donHangDTO= donHangService.layDonHangTheoId(gioHangId);
 		theModel.addAttribute("usersId", users.getId());
 		theModel.addAttribute("giohangId",gioHangDtos );
 		return "PageGioHang";

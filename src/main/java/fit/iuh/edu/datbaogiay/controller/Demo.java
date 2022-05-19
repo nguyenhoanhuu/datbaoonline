@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Demo {
 @GetMapping(value = "/home", consumes = MediaType.ALL_VALUE)
 	public String demo() {
-		return "PageDatBao";
+		return "PageChinh";
 	}
 
 @GetMapping(value = "/quanlyhoadon", consumes = MediaType.ALL_VALUE)

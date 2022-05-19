@@ -2,28 +2,17 @@ package fit.iuh.edu.datbaogiay.controller;
 
 import java.util.List;
 
-import javax.persistence.Embeddable;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import fit.iuh.edu.datbaogiay.dto.KhachHangDto;
-import fit.iuh.edu.datbaogiay.entity.KhachHang;
-import fit.iuh.edu.datbaogiay.exception.ResourceNotFoundException;
-import fit.iuh.edu.datbaogiay.repository.KhachHangRepository;
 import fit.iuh.edu.datbaogiay.service.KhachHangService;
 
 
@@ -37,19 +26,20 @@ public class KhachHangController {
 		this.khachHangService = khachHangService;
 	}
 
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/show")
 	public String listKhachHang(Model theModel) {
 		List<KhachHangDto> khachHangDtos = khachHangService.layDSKhachHang();
 		theModel.addAttribute("khachHang",khachHangDtos);
 		return "PageQuanLyKhachHang";
 	}
-	
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@PostMapping(value = "/addKhachHang", consumes = MediaType.ALL_VALUE)
 	public String themKhachHang(@ModelAttribute("khachHang") KhachHangDto khachHangDto) {
 		 khachHangService.themKhachHang(khachHangDto);
 		 return "redirect:/admin/khachHang/show";
 	}
-
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/put/{maKhachHang}")
 	public String layKhachHangTheoId(@PathVariable int maKhachHang,Model model) {
 		KhachHangDto khachHangDto = khachHangService.layKhachHangTheoId(maKhachHang);
@@ -58,6 +48,7 @@ public class KhachHangController {
 	}
 
 //	@DeleteMapping("{maKhachHang}")
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@RequestMapping(value = "/{maKhachHang}")
 	public String xoaKhachHangTheoId(@PathVariable int maKhachHang) {
 		 khachHangService.xoaKhachHangTheoId(maKhachHang);

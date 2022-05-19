@@ -48,7 +48,9 @@ public class BaoController {
 		Users users = usersService.getByUsername(principal.getName());
 		GioHang gioHang = gioHangRepository.findByUsersId(users.getId());
 		theModel.addAttribute("usersId", users.getId());
-		theModel.addAttribute("gioHangId", gioHang.getid());
+		if(users.getKhachHang()!=null) {
+			theModel.addAttribute("gioHangId", gioHang.getid());
+		}
 		theModel.addAttribute("dsBao", baos);
 		return "PageChinh";
 	}
@@ -69,7 +71,9 @@ public class BaoController {
 		theModel.addAttribute("bao1", baoDto);
 		theModel.addAttribute("baos", baoDtos);
 		theModel.addAttribute("usersId", users.getId());
-		theModel.addAttribute("gioHangId", gioHang.getid());
+		if(users.getKhachHang()!=null) {
+			theModel.addAttribute("gioHangId", gioHang.getid());
+		}
 		return "PageChiTietBao";
 
 	}

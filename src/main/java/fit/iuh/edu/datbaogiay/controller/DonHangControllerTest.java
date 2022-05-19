@@ -1,5 +1,6 @@
 package fit.iuh.edu.datbaogiay.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import fit.iuh.edu.datbaogiay.dto.DonHangDTO;
 import fit.iuh.edu.datbaogiay.dto.GioHangDto;
 import fit.iuh.edu.datbaogiay.dto.NhanVienDto;
+import fit.iuh.edu.datbaogiay.entity.Users;
 import fit.iuh.edu.datbaogiay.service.DonHangService;
+import fit.iuh.edu.datbaogiay.service.UsersService;
 
 @RestController
 public class DonHangControllerTest {
 
 	@Autowired
 	private DonHangService donHangService;
-	
+	@Autowired
+	private UsersService usersService;
 	
 	@GetMapping(value = "/donhang1", consumes = MediaType.ALL_VALUE)
 	public List<DonHangDTO> layDonHang() {
@@ -28,8 +32,8 @@ public class DonHangControllerTest {
 
 	}
 	@PostMapping(value = "/donhang2", consumes = MediaType.ALL_VALUE)
-	public void luuDonHang(@RequestBody DonHangDTO donHangDTO) {
-		donHangService.luuDonHang(donHangDTO);
+	public Integer luuDonHang(@RequestBody DonHangDTO donHangDTO, Principal principal) {
+		return donHangService.luuDonHang(donHangDTO,principal);
 	}
 
 	@GetMapping("/donhang/{donHangId}")

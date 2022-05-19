@@ -4,6 +4,7 @@ package fit.iuh.edu.datbaogiay.controller;
 import java.util.List;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class DonHangController {
 		super();
 		this.donHangService = donHangService;
 	}
-	
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping(value = "/admin/donHang/show", consumes = MediaType.ALL_VALUE)
 	public String layDSDonHang(Model model){
 		
@@ -43,6 +44,7 @@ public class DonHangController {
 		return "PageQuanLyHoaDon";
 		
 	}
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/admin/donHang/put/{madonhang}")
 	public String layDonHangTheoId(@PathVariable int  madonhang,Model model) {
 		
@@ -51,7 +53,7 @@ public class DonHangController {
 		model.addAttribute("chitietdonhang", donHangDTO.getChiTietDonHang());
 		return "PageChiTietDonHang";
 	}
-
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/admin/donHang/doanhThu/put/{madonhang}")
 	public String layDonHangTheoId1(@PathVariable int  madonhang,Model model) {
 		
@@ -73,7 +75,7 @@ public class DonHangController {
 	public String xoaDonHang(@PathVariable int  madonhang) {
 		return donHangService.xoaDonHang(madonhang);
 	}
-	
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping(value = "/admin/donHang/doanhThu/show", consumes = MediaType.ALL_VALUE)
 		public String layDSDonHang1(Model model){
 			tongtien = 0;
@@ -88,6 +90,7 @@ public class DonHangController {
 			return "PageQuanLyDoanhThu";
 			
 	}
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping(value = "/admin/donHang/test", consumes = MediaType.ALL_VALUE)
 	public String test(@ModelAttribute("day") Day day,Model model) {
 		tongtien = 0;
@@ -100,6 +103,7 @@ public class DonHangController {
 			return "PageQuanLyDoanhThu";
 	}
 	// trang tổng kết đơn hàng
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/tongdonhang/{madonhang}")
 	public String layVuaTaoDonHangTheoId(@PathVariable int  madonhang,Model model) {
 		

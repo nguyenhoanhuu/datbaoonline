@@ -48,7 +48,7 @@
 				data-validate="Username is required">
 				<input class="input100" type="text" name="diaChi"
 					placeholder="Địa chỉ nhận hàng" id="diachinhanbao"> <input
-					class="input100" type="text" placeholder="Nơi nhập khuyến mãi">
+					class="input100" type="text" placeholder="Nơi nhập khuyến mãi" id="txtKhuyenMai">
 			</div>
 			<div class="row">
 				<div class="col-md-12">
@@ -170,7 +170,7 @@
 
 			var datbao= {
 			        "maKhachHang":  $('#usersId').val(),
-			        "maKhuyenMai": 1,
+			        "maKhuyenMai":$('#txtKhuyenMai').val() ,
 			        "ngayTaoDonHang": GetTodayDate(),
 			        "trangThaiDonHang": "Chờ xử lý",
 			        "diaChiNhanHang": $('#diachinhanbao').val(),
@@ -203,7 +203,7 @@
 	      		  contentType: 'application/json; charset=utf-8',
 	      		  data: JSON.stringify(datbao),
 	      		  success: function( data ) {
-	      			alert( " thành công: " + data );
+	      			window.location.href = '../tongdonhang/' + data;
 	          	  },
 	      		});		
 				console.log(datbao);
