@@ -1,6 +1,7 @@
 package fit.iuh.edu.datbaogiay.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +33,7 @@ public class BaoController {
 	private UsersService usersService;
 	@Autowired
 	private GioHangRepository gioHangRepository;
-
-//	public BaoController(BaoService BaoService) {
-//		super();
-//		this.BaoService = BaoService;
-//	}
-//	@GetMapping(value = "/bao", consumes = MediaType.ALL_VALUE)
-//	public List<BaoDto> layDSBao() {
-//		return BaoService.layDSBao();
-//	}
+	private String tenBao;
 
 	@GetMapping(value = "/bao", consumes = MediaType.ALL_VALUE)
 	public String danhSachBao(Model theModel, Principal principal) {
@@ -48,9 +41,10 @@ public class BaoController {
 		Users users = usersService.getByUsername(principal.getName());
 		GioHang gioHang = gioHangRepository.findByUsersId(users.getId());
 		theModel.addAttribute("usersId", users.getId());
-		if(users.getKhachHang()!=null) {
+		if (users.getKhachHang() != null) {
 			theModel.addAttribute("gioHangId", gioHang.getid());
 		}
+		theModel.addAttribute("ten",tenBao);
 		theModel.addAttribute("dsBao", baos);
 		return "PageChinh";
 	}
@@ -71,7 +65,7 @@ public class BaoController {
 		theModel.addAttribute("bao1", baoDto);
 		theModel.addAttribute("baos", baoDtos);
 		theModel.addAttribute("usersId", users.getId());
-		if(users.getKhachHang()!=null) {
+		if (users.getKhachHang() != null) {
 			theModel.addAttribute("gioHangId", gioHang.getid());
 		}
 		return "PageChiTietBao";
@@ -111,5 +105,15 @@ public class BaoController {
 	public String xoaBao(@PathVariable int maBao) {
 		BaoService.xoaBao(maBao);
 		return "redirect:/admin/bao/show";
+	}
+
+	@GetMapping(value = "/timkiem", consumes = MediaType.ALL_VALUE)
+	public String search(Model model, @ModelAttribute("ten") String tenBao) {
+		List<BaoDto> baoDtos = new ArrayList<BaoDto>();
+
+		baoDtos = BaoService.timBaoTheoTen(tenBao);
+		model.addAttribute("ten", tenBao);
+		model.addAttribute("dsBao", baoDtos);
+		return "PageChinh";
 	}
 }

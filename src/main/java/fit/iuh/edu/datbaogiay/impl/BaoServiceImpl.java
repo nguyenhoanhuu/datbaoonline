@@ -70,7 +70,7 @@ public class BaoServiceImpl implements BaoService {
 	@Override
 	public List<BaoDto> timBaoTheoTen(String keyword) {
 		List<BaoDto> baoDtos = new ArrayList<BaoDto>();
-		List<Bao> baos = baoRepository.findByTenBao(keyword);
+		List<Bao> baos = baoRepository.findAllByTenBao(keyword);
 		for (Bao bao : baos) {
 			BaoDto baoDto = baoConvert.chuyenBaoDto(bao);
 			baoDtos.add(baoDto);
@@ -79,8 +79,5 @@ public class BaoServiceImpl implements BaoService {
 	}
 
 	
-	public List<Bao> findByTenBao(String tenbao) {
-		return baoRepository.findByTenBao(tenbao);
-	}
 
 }

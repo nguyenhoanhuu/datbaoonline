@@ -17,7 +17,8 @@ public interface BaoService {
 
 	public BaoDto luuBao(BaoDto baoDto);
 
-	public List<BaoDto> timBaoTheoTen(String keyword);
+	List<BaoDto> timBaoTheoTen(String keyword);
+
 	
 	
 }

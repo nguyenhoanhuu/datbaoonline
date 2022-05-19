@@ -13,5 +13,6 @@ public interface DonHangService {
 	public String xoaDonHang(int id);
 	public Integer luuDonHang(DonHangDTO donHangDTO, Principal principal);
 	List<DonHangDTO> finddonhang(int year, int month, int day);
+	void suaDonHang(DonHangDTO donHangDTO, int madonhang);
 	
 }

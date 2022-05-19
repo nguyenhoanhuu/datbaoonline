@@ -14,11 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fit.iuh.edu.datbaogiay.convert.ChiTietDonHangConvert;
 import fit.iuh.edu.datbaogiay.convert.DonHangConvert;
+import fit.iuh.edu.datbaogiay.convert.KhachHangConvert;
+import fit.iuh.edu.datbaogiay.convert.KhuyenMaiConvert;
 import fit.iuh.edu.datbaogiay.dto.ChiTietDonHangDTO;
 import fit.iuh.edu.datbaogiay.dto.DonHangDTO;
 import fit.iuh.edu.datbaogiay.entity.ChiTietDonHang;
 import fit.iuh.edu.datbaogiay.entity.ChiTietDonHangPk;
-import fit.iuh.edu.datbaogiay.entity.ChiTietGioHang;
 import fit.iuh.edu.datbaogiay.entity.ChiTietGioHangPk;
 import fit.iuh.edu.datbaogiay.entity.DonHang;
 import fit.iuh.edu.datbaogiay.entity.GioHang;
@@ -33,6 +34,8 @@ import fit.iuh.edu.datbaogiay.repository.GioHangRepository;
 import fit.iuh.edu.datbaogiay.repository.KhachHangRepository;
 import fit.iuh.edu.datbaogiay.repository.KhuyenMaiRepository;
 import fit.iuh.edu.datbaogiay.service.DonHangService;
+import fit.iuh.edu.datbaogiay.service.KhachHangService;
+import fit.iuh.edu.datbaogiay.service.KhuyenMaiService;
 import fit.iuh.edu.datbaogiay.service.UsersService;
 
 @Service
@@ -57,6 +60,14 @@ public class DonHangServiceImpl implements DonHangService {
 	private UsersService usersService;
 	@Autowired
 	private GioHangRepository gioHangRepository;
+	@Autowired
+	private KhachHangService khachHangService;
+	@Autowired
+	private KhuyenMaiService khuyenMaiService;
+	@Autowired
+	private KhachHangConvert khachHangConvert;
+	@Autowired
+	private KhuyenMaiConvert khuyenMaiConvert;
 
 	public DonHangServiceImpl(DonHangRepository donHangRepository) {
 		super();
@@ -102,11 +113,11 @@ public class DonHangServiceImpl implements DonHangService {
 		DonHang donHang = new DonHang();
 		double total = 0.0;
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
-			total += chiTietDonHangDTO.getSoKy()*chiTietDonHangDTO.getDonGia()*chiTietDonHangDTO.getSoLuong();
+			total += chiTietDonHangDTO.getSoKy() * chiTietDonHangDTO.getDonGia() * chiTietDonHangDTO.getSoLuong();
 		}
 		Optional<KhuyenMai> khuyenMai = khuyenMaiRepository.findById(donHangDTO.getMaKhuyenMai());
-		if(khuyenMai.isPresent() ) {
-			total-=khuyenMai.get().getGiaTriGiam();
+		if (khuyenMai.isPresent()) {
+			total -= khuyenMai.get().getGiaTriGiam();
 		}
 		donHang.setKhachHang(new KhachHang(donHangDTO.getMaKhachHang()));
 		donHang.setKhuyenMai(new KhuyenMai(donHangDTO.getMaKhuyenMai()));
@@ -127,12 +138,12 @@ public class DonHangServiceImpl implements DonHangService {
 			chiTietDonHangs.add(chiTietDonHang);
 		}
 		chiTietDonHangRepository.saveAll(chiTietDonHangs);
-		Users users= usersService.getByUsername(principal.getName());
+		Users users = usersService.getByUsername(principal.getName());
 		users.getId();
-		GioHang gioHang= gioHangRepository.findByKhachHang(users.getKhachHang());
+		GioHang gioHang = gioHangRepository.findByKhachHang(users.getKhachHang());
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
-			
-		chiTietGioHangRepository.deleteById(new ChiTietGioHangPk(chiTietDonHangDTO.getMabao(),gioHang.getid()));
+
+			chiTietGioHangRepository.deleteById(new ChiTietGioHangPk(chiTietDonHangDTO.getMabao(), gioHang.getid()));
 		}
 		return donHang.getid();
 	}
@@ -149,4 +160,33 @@ public class DonHangServiceImpl implements DonHangService {
 		return donHangDTOs;
 	}
 
+	@Transactional
+	@Override
+	public void suaDonHang(DonHangDTO donHangDTO, int madonhang) {
+
+		DonHang donHang = new DonHang();
+		donHang.setid(madonhang);
+		donHang.setKhachHang(khachHangConvert
+				.chuyenKhachHangEntity(khachHangService.layKhachHangTheoId(donHangDTO.getMaKhachHang())));
+		donHang.setKhuyenMai(khuyenMaiConvert
+				.chuyenKhuyenMaiEntity(khuyenMaiService.layKhuyenMaiTheoid(donHangDTO.getMaKhuyenMai())));
+		donHang.setNgayTaoDonHang(donHangDTO.getNgayTaoDonHang());
+		donHang.setTrangThaiDonHang(donHangDTO.getTrangThaiDonHang());
+		donHang.setDiaChiNhanHang(donHangDTO.getDiaChiNhanHang());
+		donHang.setTongTienDonHang(donHangDTO.getTongTienDonHang());
+		donHang.setHinhThucThanhToan(donHangDTO.getHinhThucThanhToan());
+		donHangRepository.save(donHang);
+
+		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
+		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
+			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
+			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(), chiTietDonHangDTO.getMabao()));
+			chiTietDonHang.setNgayDatBao(chiTietDonHangDTO.getNgayDatBao());
+			chiTietDonHang.setNgatKetThucDatBao(chiTietDonHangDTO.getNgatKetThucDatBao());
+			chiTietDonHang.setSoKy(chiTietDonHangDTO.getSoKy());
+			chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
+			chiTietDonHangs.add(chiTietDonHang);
+		}
+		chiTietDonHangRepository.saveAll(chiTietDonHangs);
+	}
 }
