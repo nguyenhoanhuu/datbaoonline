@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Table 08</title>
+<title>Giỏ hàng</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -135,7 +135,7 @@
 		function confirm_form_delete(event, baoId,gioHangId){
 			 var datbao = {
 					 "baoId": $('#txtId').val(),
-					 "gioHangId": 17  
+					 "gioHangId": 1  
 	            };
 			$.ajax({
       		  type: "POST",

@@ -14,7 +14,8 @@
         <link rel="stylesheet" href="../css/ChiTietBao.css">
     </head>
     <body>
-    
+    	<input id="usersId" type="hidden" th:value="${usersId}" />
+    	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
         <div id="wapper">
             <nav>
                 <ul class="menu">
@@ -24,7 +25,7 @@
                 </ul>
                 <span>
                     <ul>
-                        <li><a href="#"><i><img
+                        <li><a th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><i><img
                                         src="../img/icon/akar-icons_cart.svg"
                                         alt=""></i>Giỏ hàng</a></li>
                         <li><a href="#"><i><img src="../img/icon/bx_user.svg"
@@ -34,19 +35,19 @@
             </nav>
         </div>
         <div class="detail_product">
-            <div class="product" onchange="getsoki()">
+            <div class="product" onchange="getsoki()" th:each="todoitem : ${bao1}">
                 <div class="picture_product">
                     <i><img src="../img/product_demo.jpg" alt=""></i>
                 </div>
-                <div th:object="${bao1}" class="infor_product">
+                <div  class="infor_product">
                     <div class="infor">
                         <label for="txtName" style="padding-right: 30px;">Tên:</label>
-                        <input th:field="*{tenBao}" type="text" name="txtName" id="txtName" disabled>
-                        <input type="hidden" th:field="*{Id}" id="txtId">
+                        <input th:value="${todoitem.tenBao}" type="text" name="txtName" id="txtName" disabled>
+                        <input type="hidden"th:value="${todoitem.Id}"  id="txtId">
                     </div>
                     <div class="infor">
                         <label for="txtPrice">Đơn Giá:</label>
-                        <input th:field="*{donGia}" type="text" name="txtPrice" id="txtPrice" disabled>
+                        <input  th:value="${todoitem.donGia}" type="text" name="txtPrice" id="txtPrice" disabled>
                     </div>
                      <div class="infor">
                         <label for="txtSoLuong">Số lượng:</label>
@@ -65,7 +66,7 @@
                 </div>
                 <div class="infor">
                     <label for="txtdescrip" style="padding-right: 20px;">Mô Tả:</label>
-                    <input th:field="*{moTa}" type="text" name="txtdescrip" id="txtdescrip" disabled>
+                    <input  th:value="${todoitem.moTa}"type="text" name="txtdescrip" id="txtdescrip" disabled>
                 </div>
                 <div class="submit">
                     <button id="button_order" type="button"
@@ -136,11 +137,11 @@
 //             "tenBao": "Thiếu niên nói",
 //             "thanhTien": 45000.0
             var datbao = {
-            	    "id": 17,
-            	    "khachHangId": 8,
+            	    "id": $('#gioHangId').val(),
+            	    "khachHangId": $('#usersId').val(),
             	    "chiTietGioHang": [
             	        {
-            	            "gioHangId": 17,
+            	            "gioHangId": $('#gioHangId').val(),
             	            "baoId": $('#txtId').val(),
             	            "ngayDatBao": $('#txtstartorderdate').val(),
             	            "ngaytKetThucDatBao": $('#txtendorderdate').val(),
@@ -150,7 +151,7 @@
             	        }
            	        ]
             };
-
+console.log(123);
 //             var chiTietGioHangs = [];
 //             var chiTietGioHang = {
 //                     id: {
