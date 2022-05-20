@@ -13,5 +13,6 @@ public class KhachHangDto extends AbstractDTO{
 	private String SDT;
 	private String email;
 	private String matKhau;
+	private int maUser;
 	
 }
