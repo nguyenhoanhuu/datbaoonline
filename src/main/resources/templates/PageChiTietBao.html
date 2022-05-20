@@ -92,7 +92,6 @@
                             <div class="order_product">
                                 <span th:text="${tempBao.getTenBao()}">Lorem ipsum dolor sit a</span>
                                 <button  >đặt báo</button>
-                                
                             </div>
                         </div>
 
@@ -129,23 +128,9 @@
      		   var dd = String(today.getDate()).padStart(2, '0');
      		   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
      		   var yyyy = today.getFullYear();
-
      		   today= yyyy+'-'+mm+'-'+dd;
      		   return today;
      		}
-//         	"id": {
-//                 "baoId": 4,
-//                 "gioHangId": 17
-//             },
-//             "gioHangId": 17,
-//             "baoId": 4,
-//             "ngayDatBao": "2023-04-05T17:00:00.000+00:00",
-//             "ngaytKetThucDatBao": "2023-04-05T17:00:00.000+00:00",
-//             "soLuong": 10,
-//             "soKy": 15,
-//             "donGia": 3000.0,
-//             "tenBao": "Thiếu niên nói",
-//             "thanhTien": 45000.0
             var datbao = {
             	    "id": $('#gioHangId').val(),
             	    "khachHangId": $('#usersId').val(),
@@ -162,20 +147,6 @@
            	        ]
             };
 console.log(123);
-//             var chiTietGioHangs = [];
-//             var chiTietGioHang = {
-//                     id: {
-// 						baoId:  1,
-// 						gioHangId: 17
-//                     }
-//             };
-//             chiTietGioHangs.push(chiTietGioHang);
-
-//             datbao.chiTietGioHang = chiTietGioHangs;
-//         	$.post('../giohang2', datbao)
-//         	  .success(function( data ) {
-//         	    alert( "Data Loaded: " + data );
-//         	  }, dataType: json);
 
         	$.ajax({
         		  type: "POST",
@@ -183,7 +154,7 @@ console.log(123);
         		  contentType: 'application/json; charset=utf-8',
         		  data: JSON.stringify(datbao),
         		  success: function( data ) {
-              	    alert( "dữ liệu thêm vào giỏ hàng thành công: " + data );
+              	    alert( "báo đã được thêm vào giỏ hàng thành công " + data );
             	  },
         		});
         }

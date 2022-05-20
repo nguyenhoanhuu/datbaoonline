@@ -20,7 +20,6 @@ import fit.iuh.edu.datbaogiay.service.DonHangService;
 import fit.iuh.edu.datbaogiay.service.UsersService;
 
 @Controller
-//@RequestMapping("/admin/donHang")
 public class DonHangController {
 
 	private DonHangService donHangService;

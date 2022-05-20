@@ -23,8 +23,4 @@ public class Demo {
 public String DemoQuanLyChiTiet() {
 	return "PageChiTietBao";
 }
-//@GetMapping(value = "/donhang", consumes = MediaType.ALL_VALUE)
-//public String DemoDonHang() {
-//	return "PageTongKetDonHang";
-//}
 }

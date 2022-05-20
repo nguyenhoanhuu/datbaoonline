@@ -204,9 +204,10 @@ nav span ul li {
             <th scope="col">Mã Báo </th>
             <th scope="col">Ngày đặt báo</th>
             <th scope="col">Ngày kết thúc đặt báo </th>
-            <th scope="col">số lượng</th>
-            <th scope="col">số kì</th>
-            <th scope="col">thành tiền </th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Số kì</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Thành tiền </th>
           </tr>
         </thead>
         <tbody>
@@ -214,11 +215,11 @@ nav span ul li {
             <td scope="row">1</th>
             <td th:text=${chitiet.madonHang}></td>
 			<td th:text=${chitiet.mabao}></td>
-			<td th:text=${chitiet.ngayDatBao}></td>
-			<td th:text=${chitiet.ngatKetThucDatBao}></td>
+			<td th:text="${#dates.format(chitiet.ngayDatBao, 'dd-MM-yyyy')}"></td>
+			<td th:text="${#dates.format(chitiet.ngatKetThucDatBao, 'dd-MM-yyyy')}"></td>
 			<td th:text=${chitiet.soLuong}></td>
 			<td th:text=${chitiet.soKy}></td>
-		
+			<td th:text="${#numbers.formatDecimal(chitiet.donGia, 0, 'COMMA', 0, 'POINT')}+ ' đ'"></td>
             <td th:text="${#numbers.formatDecimal(chitiet.thanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
       
         </tr>

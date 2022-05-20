@@ -71,7 +71,7 @@ public class KhuyenMaiController {
 //		public KhuyenMaiDto themKhuyenMai(@RequestBody KhuyenMaiDto khuyenMaiDto) {
 //			 return KhuyenMaiService.themKhuyenMai(khuyenMaiDto);
 //		}
-	@PreAuthorize("hasRole('EMPLOYEE')")
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@PostMapping(value = "/addKhuyenMai", consumes = MediaType.ALL_VALUE)
 	public String themKhuyenMai1(@ModelAttribute("khuyenmai") KhuyenMaiDto khuyenMaiDto) {
 		KhuyenMaiService.themKhuyenMai(khuyenMaiDto);

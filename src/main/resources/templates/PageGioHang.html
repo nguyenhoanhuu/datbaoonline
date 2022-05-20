@@ -134,13 +134,11 @@
 	function GetTodayDate() {
 		   var today = new Date();
 		   var dd = String(today.getDate()).padStart(2, '0');
-		   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		   var mm = String(today.getMonth() + 1).padStart(2, '0'); 
 		   var yyyy = today.getFullYear();
-
 		   today= yyyy+'-'+mm+'-'+dd;
 		   return today;
 		}
-
 	
 		function confirm_form_delete(event, baoId,gioHangId){
 			 var datbao = {
@@ -154,11 +152,10 @@
       		  data: JSON.stringify(datbao),
       		  success: function( data ) {
       			$(event.target).parents('tr').remove()
-      			
-      			
           	  },
       		});
 			}
+		
 		function mua_bao() {
 			var laycheckbox=document.getElementsByClassName("checkbox_baoId");
 			 var result = "";
@@ -167,7 +164,6 @@
 					result += ' [' + laycheckbox[i].value + ']';
 					}
 				}
-
 			var datbao= {
 			        "maKhachHang":  $('#usersId').val(),
 			        "maKhuyenMai":$('#txtKhuyenMai').val() ,
@@ -176,9 +172,7 @@
 			        "diaChiNhanHang": $('#diachinhanbao').val(),
 			        "hinhThucThanhToan": "Tại nhà",
 			        "chiTietDonHang": [],
-			       
 		}
-
 			$('.checkbox_baoId:checked').each(function(index, ele) {
 				var parent = $(ele).parents('tr');
 				var chiTietDonHang = {
@@ -191,11 +185,9 @@
 	                "donGia": parent.find('td[name="donGia"]').text(),
 	                "thanhTien": parent.find('td[name="thanhTien"]').text(),
 	   	            }
-
 				datbao.chiTietDonHang.push(chiTietDonHang);	
-				
-				
 			});
+			
 			$.ajax({
 	      		  type: "POST",
 	      		  url: '../donhang2',
@@ -205,10 +197,7 @@
 	      			window.location.href = '../tongdonhang/' + data;
 	          	  },
 	      		});		
-				console.log(datbao);
 		}
-			
-			
 	</script>
 </body>
 </html>

@@ -22,33 +22,15 @@ import fit.iuh.edu.datbaogiay.service.ChiTietGioHangService;
 public class ChiTietGioHangController {
 	@Autowired
 	private	ChiTietGioHangService chiTietGioHangService;
-//	public ChiTietGioHangController(ChiTietGioHangService chiTietGioHangService) {
-//		super();
-//		this.chiTietGioHangService = chiTietGioHangService;
-//	}
 	
 	@GetMapping( value ="/chitietgiohang", consumes = MediaType.ALL_VALUE)
 	public List<ChiTietGioHangDto> layDSChiTietGioHang(){
 		return chiTietGioHangService.layDSChiTietGioHang();
 	}
-//	@GetMapping("/chitietgiohang/{machitietgiohang}")
-//	public ChiTietGioHang layChiTietGioHangTheoId(@PathVariable int  machitietgiohang) {
-//		return chiTietGioHangService.layChiTietGioHangTheoId(machitietgiohang);
-//	}
 	
 	@PostMapping(value = "/chitietgiohang", consumes = MediaType.ALL_VALUE)
 	public ChiTietGioHangDto luuChiTietGioHang(@RequestBody ChiTietGioHangDto chiTietGioHang) {
 		return chiTietGioHangService.luuChiTietGioHang(chiTietGioHang);
 	}
 	
-//	@PutMapping(value = "/chitietgiohang", consumes = MediaType.ALL_VALUE)
-//	public ChiTietGioHang luuChiTietGioHang1(@RequestBody ChiTietGioHang chiTietGioHang) {
-//		return chiTietGioHangService.luuChiTietGioHang(chiTietGioHang);
-//	}
-	
-	
-//	@DeleteMapping("/chitietgiohang/{sanPhamId}")
-//	public String xoaChiTietGioHang(@PathVariable int  sanPhamId) {
-//		return chiTietGioHangService.xoaChiTietGioHang(sanPhamId);
-//	}
 }

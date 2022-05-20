@@ -35,36 +35,14 @@ public class ChiTietDonHangController {
 		this.donHangService = donHangService;
 		this.baoService = baoService;
 	}
-//	@GetMapping("/chitietdonhang/{mabao}/{madonhang}")
-//	public ChiTietDonHang chiTietDonHangPk(@PathVariable int mabao,@PathVariable int  madonhang) {
-//		Bao bao = baoService.layBaoTheoID(mabao);
-//		DonHang donhang = donHangService.layDonHangTheoId(madonhang);
-//		ChiTietDonHangPk chiTietDonHangPk = new ChiTietDonHangPk(donhang, bao);
-//		return chiTietDonHangService.layChiTietDonHangTheoid(chiTietDonHangPk);
-//	}
 
 	@GetMapping("/chitietdonhang")
 	public List<ChiTietDonHang> layDSDonHang(){
 		return chiTietDonHangService.layDSChiTietDonHang();
 	}
 
-//	@PostMapping(value = "/chitietdonhang/{mabao}/{madonhang}", consumes = MediaType.ALL_VALUE)
-//	public ChiTietDonHang luuChiTietDonHang(@RequestBody ChiTietDonHang chiTietDonHang,@PathVariable int mabao,@PathVariable int  madonhang) {
-//		Bao bao = baoService.layBaoTheoID(mabao);
-//		DonHang donhang = donHangService.layDonHangTheoId(madonhang);
-//		chiTietDonHang.setBao(bao);
-//		chiTietDonHang.setDonHang(donhang);
-//		return chiTietDonHangService.luuChitietDonHang(chiTietDonHang);
-//	}
 	@PutMapping(value = "/chitietdonhang", consumes = MediaType.ALL_VALUE)
 	public ChiTietDonHang luuChiTietDonHan1(@RequestBody ChiTietDonHang chiTietDonHang) {
 		return chiTietDonHangService.luuChitietDonHang(chiTietDonHang);
 	}
-//	@DeleteMapping("/chitietdonhang/{mabao}/{madonhang}")
-//	public String xoaChiTietDonHang(@PathVariable int mabao,@PathVariable int  madonhang) {
-//		Bao bao = baoService.layBaoTheoID(mabao);
-//		DonHang donhang = donHangService.layDonHangTheoId(madonhang);
-//		ChiTietDonHangPk chiTietDonHangPk = new ChiTietDonHangPk(donhang, bao);
-//		return chiTietDonHangService.XoaChiTietDonHang(chiTietDonHangService.layChiTietDonHangTheoid(chiTietDonHangPk));
-//	}
 }

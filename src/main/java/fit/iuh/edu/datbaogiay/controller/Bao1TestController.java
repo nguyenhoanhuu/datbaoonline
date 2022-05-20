@@ -15,8 +15,6 @@ import fit.iuh.edu.datbaogiay.service.BaoService;
 public class Bao1TestController {
 	@Autowired
 	private BaoService BaoService;
-	
-	
 	@GetMapping(value = "/bao/{tenBao}",consumes = MediaType.ALL_VALUE)
 	public List<BaoDto> layBaoTheoTen(@PathVariable String tenBao) {
 		return  BaoService.timBaoTheoTen(tenBao);

@@ -59,7 +59,6 @@
 				<th scope="col">Trạng thái</th>
 				<th scope="col">Danh sách sản phẩm</th>
 				<th scope="col">Tổng tiền hóa đơn</th>
-				<th>Sửa</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -86,7 +85,6 @@
 				<td><a th:href="@{put/__${tempDonHang.id}__}">Xem chi tiết</a></td>
 				<td
 					th:text="${#numbers.formatDecimal(tempDonHang.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+' đ'"></td>
-				<td><a th:href="@{update/__${tempDonHang.id}__}">sửa</a></td>
 			</tr>
 
 

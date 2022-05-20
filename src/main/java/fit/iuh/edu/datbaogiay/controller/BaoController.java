@@ -100,7 +100,6 @@ public class BaoController {
 		return BaoService.luuBao(baoDto);
 	}
 
-//	@DeleteMapping("/bao/{maBao}")
 	@RequestMapping(value = "/admin/bao/{maBao}")
 	public String xoaBao(@PathVariable int maBao) {
 		BaoService.xoaBao(maBao);

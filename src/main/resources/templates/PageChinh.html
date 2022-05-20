@@ -47,7 +47,7 @@
 		</div>
 		<form th:action="@{/timkiem}" method="get">
          	<div class="header-search">
- 					 <input class="header-search-input" type="text" name="ten" th:value="${ten}"  placeholder="Tìm kiếm" size="20" >
+ 					 <input class="header-search-input" type="text" name="ten" th:value="${ten}"  placeholder="Tìm kiếm" size="20"pattern="[A-Za-z]+" title="Three letter country code" >
  						 <button class="header-search-button" type="submit">Tìm kiếm</button>
  						</div>
  			 </form>

@@ -21,18 +21,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	}
 
-//  @Bean
-//  @Override
-//  public UserDetailsService userDetailsService() {
-//    UserDetails user =
-//        User.withDefaultPasswordEncoder()
-//            .username("user")
-//            .password("password")
-//            .roles("USER")
-//            .build();
-//
-//    return new InMemoryUserDetailsManager(user);
-//  }
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {

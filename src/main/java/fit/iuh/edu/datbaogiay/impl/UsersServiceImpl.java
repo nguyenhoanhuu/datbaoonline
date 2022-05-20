@@ -17,5 +17,9 @@ public class UsersServiceImpl implements UsersService {
 	public Users getByUsername(String userName) {
 		return usersRepository.findByUsername(userName).orElse(null);
 	}
+	@Override
+	public Users findById(int id ) {
+		return usersRepository.findById(id);
+	}
 
 }

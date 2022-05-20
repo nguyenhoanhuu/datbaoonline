@@ -47,7 +47,6 @@ public class KhachHangController {
 		return "PageThemKhachHang";
 	}
 
-//	@DeleteMapping("{maKhachHang}")
 	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@RequestMapping(value = "/{maKhachHang}")
 	public String xoaKhachHangTheoId(@PathVariable int maKhachHang) {
@@ -56,52 +55,5 @@ public class KhachHangController {
 	}
 	
 
-//	@PutMapping("{maKhachHang}")
-//	public void suaKhachHang(@PathVariable int id, @RequestBody KhachHangDto khachHangDto) {
-//		khachHangService.suaKhachHang(id, khachHangDto);
-//		
-//	}
-
-//	@Autowired
-//	private TacGiaRepository tacGiaRepository;
-//
-//	// get all
-//	@GetMapping
-//	public TacGia getAllTacGia() {
-//		return (TacGia) this.tacGiaRepository.findAll();
-//	}
-//
-//	// get id
-//	public TacGia getTacGiaById(@PathVariable(value = "id") int tacGiaId) {
-//		return this.tacGiaRepository.findById(tacGiaId)
-//				.orElseThrow(() -> new ResourceNotFoundException("Tac gia khong duoc tim thay voi id: " + tacGiaId));
-//
-//	}
-//
-//	// create
-//	@PostMapping
-//	public TacGia createTacGia(@RequestBody TacGia tacGia) {
-//
-//		return this.tacGiaRepository.save(tacGia);
-//
-//	}
-//
-//	// update
-//	@PutMapping("/{id}")
-//	public TacGia updateTacGia(@RequestBody TacGia tacGia, @PathVariable("id") int tacGiaId) {
-//		TacGia tacGiaExisting = this.tacGiaRepository.findById(tacGiaId)
-//				.orElseThrow(() -> new ResourceNotFoundException("Tac gia khong duoc tim thay voi id: " + tacGiaId));
-//		tacGiaExisting.setTenTacGia(tacGia.getTenTacGia());
-//		return this.tacGiaRepository.save(tacGiaExisting);
-//	}
-//
-//	// delete by id
-//	@DeleteMapping("/{id}")
-//	public ResponseEntity<TacGia> deleteTacGia(@PathVariable("id") int tacGiaId) {
-//		TacGia tacGiaExisting = this.tacGiaRepository.findById(tacGiaId)
-//				.orElseThrow(() -> new ResourceNotFoundException("Tac gia khong duoc tim thay voi id: " + tacGiaId));
-//		this.tacGiaRepository.delete(tacGiaExisting);
-//		return ResponseEntity.ok().build();
-//	}
 
 }

@@ -8,4 +8,6 @@ import fit.iuh.edu.datbaogiay.entity.Users;
 public interface UsersService {
 	public Users getByUsername(String userName);
 
+	Users findById(int id);
+
 }

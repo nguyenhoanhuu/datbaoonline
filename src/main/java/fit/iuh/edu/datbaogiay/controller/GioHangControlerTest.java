@@ -42,17 +42,6 @@ public class GioHangControlerTest {
 		gioHangService.luuGioHang(gioHangDto);
 	}
 
-//	@PostMapping(value = "/giohang2", consumes = MediaType.ALL_VALUE)
-//	@RequestMapping(value="/giohang2", method=RequestMethod.POST)
-//	@ResponseBody
-//	@PreAuthorize("#gioHangDto.author.name == #principal.name")
-//	public void themBaoVaoGioHang(@RequestBody GioHangDto gioHangDto, Principal principal) {
-//		Users users = usersService.getByUsername(principal.getName());
-//		users.getId();
-//		GioHang gioHang = gioHangRepository.findByUsersId(users.getId());
-//		gioHangService.themBaoVaoGioHang(gioHangDto);
-//	}
-//	
 
 	@PostMapping(value = "/giohang2", consumes = MediaType.ALL_VALUE)
 	public void themBaoVaoGioHang(@RequestBody GioHangDto gioHangDto) {
