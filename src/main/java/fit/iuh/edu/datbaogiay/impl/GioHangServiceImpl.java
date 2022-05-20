@@ -40,26 +40,6 @@ public class GioHangServiceImpl implements GioHangService {
 	private BaoRepository baoRepository;
 	@Autowired
 	private ChiTietGioHangRepository chiTietGioHangRepository;
-//	
-//	public GioHangServiceImpl(GioHangRepository gioHangRepository) {
-//		super();
-//		this.gioHangRepository = gioHangRepository;
-//	}
-//	@Override
-//	public List<GioHangDto> layDSGioHang() {
-//		List<GioHang> gioHangs = (List<GioHang>) gioHangRepository.findAll();
-//		List<GioHangDto> gioHangDtos = new ArrayList<GioHangDto>();
-//		
-//		for (GioHang gioHang : gioHangs) {
-//			if (Objects.isNull(gioHang)) {
-//				return null;
-//			}
-//			GioHangDto gioHangDto = gioHangConvert.chuyenGioHangDto(gioHang);
-//			gioHangDtos.add(gioHangDto);
-//		}
-//		
-//		return gioHangDtos;
-//	}
 
 	@Override
 	public GioHangDto layGioHangTheoId(int id) {
@@ -138,7 +118,6 @@ public class GioHangServiceImpl implements GioHangService {
 				chiTietGioHang.setNgayKetThucDatBao(chiTietGioHangDto.getNgaytKetThucDatBao());
 				chiTietGioHang.setSoKy(chiTietGioHangDto.getSoKy());
 				chiTietGioHang.setSoLuong(chiTietGioHangDto.getSoLuong());
-//			
 				chiTietGioHangRepository.save(chiTietGioHang);
 				gioHangRepository.save(gioHang);
 			}

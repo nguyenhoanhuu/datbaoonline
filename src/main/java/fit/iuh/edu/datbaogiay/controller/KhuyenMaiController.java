@@ -1,5 +1,6 @@
 package fit.iuh.edu.datbaogiay.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fit.iuh.edu.datbaogiay.dto.KhuyenMaiDto;
+import fit.iuh.edu.datbaogiay.entity.Users;
 import fit.iuh.edu.datbaogiay.service.KhuyenMaiService;
 import fit.iuh.edu.datbaogiay.service.NhanVienService;
+import fit.iuh.edu.datbaogiay.service.UsersService;
 
 @Controller
 @RequestMapping("/admin/khuyenMai")
@@ -25,6 +28,8 @@ public class KhuyenMaiController {
 	private KhuyenMaiService KhuyenMaiService;
 	@Autowired
 	private NhanVienService nhanVienService;
+	@Autowired
+	private UsersService usersService;
 
 	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/show")
@@ -61,8 +66,9 @@ public class KhuyenMaiController {
 
 	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@GetMapping("/put")
-	public String themKhuyenMai2(Model model) {
-		KhuyenMaiDto khuyenMaiDto = new KhuyenMaiDto();
+	public String themKhuyenMai2(Model model, Principal principal) {
+		Users users = usersService.getByUsername(principal.getName());
+		KhuyenMaiDto khuyenMaiDto = new KhuyenMaiDto(users.getNhanVien().getid());
 		model.addAttribute("khuyenmai", khuyenMaiDto);
 		return "PageThemKhuyenMai";
 	}

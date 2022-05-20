@@ -13,9 +13,10 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<title>Document</title>
+<title>Quản lý khách hàng</title>
 </head>
 <body>
+
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
@@ -37,8 +38,8 @@
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/donHang/show}">Hoá
-					đơn</a></li>
+			<li id="nav-header-li"><a id="123"
+				th:href="@{/admin/donHang/show}">Hoá đơn</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/khachHang/show}">Khách hàng</a></li>
 			<li id="nav-header-li"><a id="123"
@@ -48,7 +49,8 @@
 	<br>
 	<br>
 
-	<form class="add_KhuyenMai" th:object="${khachHang}" th:action="@{/admin/khachHang/addKhachHang}" method="POST">
+	<form class="add_KhuyenMai" th:object="${khachHang}"
+		th:action="@{/admin/khachHang/addKhachHang}" method="POST">
 		<div class="KhachHang">
 			<div class="infor_product">
 				<div class="infor">
@@ -56,22 +58,26 @@
 
 					<label for="txtName" style="padding-right: 30px;">Tên Khách
 						Hàng :</label> <input th:field="*{tenKhachHang}" type="text"
-						name="txtName" id="txtName">
+						name="txtName" id="txtName"
+						pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 '\\s]+$"
+						title="Tên khách hàng không có kí tự đặt biệt">
 				</div>
 				<div class="infor" onchange="getdate()">
-					<label for="txtName" style="padding-right: 45px;">Số Điện Thoại :</label>
-					 <input th:field="*{SDT}" type="text"
-						name="txtSDT" id="txtSDT">
+					<label for="txtName" style="padding-right: 45px;">Số Điện
+						Thoại :</label> <input th:field="*{SDT}" type="text" name="txtSDT"
+						id="txtSDT"  pattern="^0[987]{1}\d{8}$"  title="SĐT phải có 10 số và bắt đầu bằng 09 hoặc 08 hoặc 07">
 				</div>
 				<div class="infor">
 					<label for="txtdescrip" style="padding-right: 109px;">Email:</label>
-					 <input th:field="*{email}" type="text" name="txtemail" id="txtemail">
+					<input th:field="*{email}" type="text" name="txtemail"
+						id="txtemail"> <input th:field="*{maUser}" type="hidden"
+						name="txtemail" id="txtemail" pattern="/^[a-zA-Z0-9.\_\-]+@([a-zA-Z0-9])+.\w{3}$/"  title="Email phải có dấu @ và dấu .">
 				</div>
 
 				<div class="submit">
 					<button id="button_order" type="submit" onclick="confirm_form()"
 						style="border-radius: 20%; height: 30px;">
-						<p>Sửa </p>
+						<p>Sửa</p>
 					</button>
 				</div>
 			</div>

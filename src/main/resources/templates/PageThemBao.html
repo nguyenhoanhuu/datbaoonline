@@ -14,7 +14,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 	
-<title>Document</title>
+<title> Quản lý báo</title>
 </head>
 <body>
 	<div id="wapper">
@@ -56,18 +56,18 @@
                     	<input th:field="*{id}" type="hidden" name="txtid" id="txtid">
 
                         <label for="txtName" style="padding-right: 30px;">Tên báo :</label>
-                        <input th:field="*{tenBao}" type="text" name="txtName" id="txtName">
+                        <input th:field="*{tenBao}" type="text" name="txtName" id="txtName"pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 '\\s]+$"  title="Tên báo không có kí tự đặt biệt" >
                     </div>
                     <div class="infor" >
                     <label for="txtstartday" style="padding-right: 25px;">Hình Ảnh:</label>
 					<input type="text" id="txtstartday1" th:field="*{hinhAnh}"><br><br>
 
                     <label for="txtendday" style="padding-right: 34px;">Đơn Giá:</label>
-					<input type="text" id="txtendday1" th:field="*{donGia}">	
+					<input type="text" id="txtendday1" th:field="*{donGia}"pattern="[-+]?[0-9]*\.?[0-9]"  title="Đơn giá phải là kí tử số" >		
                 </div>
                 <div class="infor">
                     <label for="txtdescrip" style="padding-right: 47px;">Mô Tả:</label>
-                    <input th:field="*{moTa}" type="text" name="txtdescrip" id="txtdescrip">
+                    <input th:field="*{moTa}" type="text" name="txtdescrip" id="txtdescrip" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 '\\s]+$"  title="Mô tả báo không có kí tự đặt biệt">
                 </div>
   
                 <div class="submit">

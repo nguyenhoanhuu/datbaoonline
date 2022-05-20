@@ -13,8 +13,8 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-	
-<title>Document</title>
+
+<title>Quản lý khuyến mãi</title>
 </head>
 <body>
 	<div id="wapper">
@@ -38,8 +38,8 @@
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/donHang/show}">Hoá
-					đơn</a></li>
+			<li id="nav-header-li"><a id="123"
+				th:href="@{/admin/donHang/show}">Hoá đơn</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/khachHang/show}">Khách hàng</a></li>
 			<li id="nav-header-li"><a id="123"
@@ -49,37 +49,61 @@
 	<br>
 	<br>
 
-		<form class="add_KhuyenMai" th:object="${khuyenmai}" th:action="@{/admin/khuyenMai/addKhuyenMai}" method="POST">
-            <div class="KhuyenMai">
-                <div class="infor_product">
-                    <div class="infor">
-                    	<input th:field="*{id}" type="hidden" name="txtid" id="txtid">
-
-                        <label for="txtName" style="padding-right: 30px;">Giá trị Giảm :</label>
-                        <input th:field="*{giaTriGiam}" type="text" name="txtName" id="txtName">
-                    </div>
-                    <div class="infor" onchange="getdate()">
-                    <label for="txtstartday" style="padding-right: 25px;">ngày bắt đầu:</label>
-					<input type="text" id="txtstartday1" th:field="*{ngayBatDau}"><br><br>
-
-                    <label for="txtendday" style="padding-right: 25px;">ngày kết thúc:</label>
-					<input type="text" id="txtendday1" th:field="*{ngayHetHan}">	
-                </div>
-                <div class="infor">
-                    <label for="txtdescrip" style="padding-right: 8px;">Tên Khuyến Mãi:</label>
-                    <input th:field="*{tenKhuyenMai}" type="text" name="txtdescrip" id="txtdescrip">
-                </div>
+	<form class="add_KhuyenMai" th:object="${khuyenmai}"
+		th:action="@{/admin/khuyenMai/addKhuyenMai}" method="POST"
+		onchange="getDataOfDate()">
+		<div class="KhuyenMai">
+			<div class="infor_product">
 				<div class="infor">
-                    <label for="txtdescrip" style="padding-right: 19px;">Mã Nhân Viên:</label>
-                    <input th:field="*{maNhanVien}" type="text" name="txtdescrip" id="txtdescrip">
-                </div>
-  
-                <div class="submit">
-                    <button id="button_order" type="submit"
-                        onclick="confirm_form()" style="border-radius: 20%; height: 30px;" ><p>thêm</p></button>
-                </div>
-            </div>
-        </div>
-		</form>
+					<input th:field="*{id}" type="hidden" name="txtid" id="txtid">
+
+					<label for="txtName" style="padding-right: 30px;">Giá trị
+						Giảm :</label> <input th:field="*{giaTriGiam}" type="text" name="txtName"
+						id="txtName" pattern="[-+]?[0-9]*\.?[0-9]"
+						title="Giá trị giảm phải là kí tử số">
+				</div>
+				<div class="infor">
+					<label for="txtstartday" style="padding-right: 25px;">ngày
+						bắt đầu:</label> <input type="text" id="txtstartday1"
+						th:value="*{#dates.format(ngayBatDau, 'yyyy-MM-dd')}" pattern="\d{4}[-|/]\d{1,2}[-|/]\d{1,2}"  title="Ngày bắt đầu phải theo quy định yyyy-MM-dd VD:2022-09-09"> <input
+						
+						type="hidden" id="txtstartday2" th:field="*{ngayBatDau}"><br>
+					<br> <label for="txtendday" style="padding-right: 25px;">ngày
+						kết thúc:</label> <input type="text" id="txtendday1"
+						th:value="*{#dates.format(ngayHetHan, 'yyyy-MM-dd')}" pattern="\d{4}[-|/]\d{1,2}[-|/]\d{1,2}"  title="Ngày kết thúc phải theo quy định yyyy-MM-dd VD:2022-09-09"> <input
+						type="hidden" id="txtendday2" th:field="*{ngayHetHan}">
+				</div>
+				<div class="infor">
+					<label for="txtdescrip" style="padding-right: 8px;">Tên
+						Khuyến Mãi:</label> <input th:field="*{tenKhuyenMai}" type="text"
+						name="txtdescrip" id="txtdescrip"
+						pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹê 0123456789 '\\s]+$"
+						title="Tên khuyến mãi không có kí tự đặt biệt">
+				</div>
+				<div class="infor" hidden>
+					<label for="txtdescrip" style="padding-right: 19px;">Mã
+						Nhân Viên:</label> <input th:field="*{maNhanVien}" type="text"
+						name="txtdescrip" id="txtdescrip">
+				</div>
+
+				<div class="submit">
+					<button id="button_order" type="submit" onclick="confirm_form()"
+						style="border-radius: 20%; height: 30px;">
+						<p>thêm</p>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script>
+	          function getDataOfDate(){
+	              var a = document.getElementById("txtstartday1").value;
+	              var b = document.getElementById("txtendday1").value;
+	              var c=document.getElementById("txtstartday2");
+	              var d=document.getElementById("txtendday2");
+	              c.setAttribute("value",a);
+	              d.setAttribute("value",b);
+	            }
+      </script>
 </body>
 </html>

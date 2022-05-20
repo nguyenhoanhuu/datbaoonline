@@ -1,9 +1,7 @@
 package fit.iuh.edu.datbaogiay.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,25 +13,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Data;
 @Entity
 @Table(name = "khuyen_mai")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class KhuyenMai {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
-	@Column(name = "ten_khuyen_mai",columnDefinition = "nvarchar(100)")
+	@Column(name = "ten_khuyen_mai", columnDefinition = "nvarchar(100)")
 	private String tenKhuyenMai;
 	@Column(name = "ngay_bat_dau")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ngayBatDau;
 	@Column(name = "ngay_het_han")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ngayHetHan;
 	@Column(name = "gia_tri_giam")
 	private double giaTriGiam;
@@ -42,9 +45,8 @@ public class KhuyenMai {
 	@JoinColumn(name = "nhanVienId")
 	private NhanVien nhanVien;
 
-	@OneToMany(mappedBy = "khuyenMai",cascade = {CascadeType.MERGE})
+	@OneToMany(mappedBy = "khuyenMai", cascade = { CascadeType.MERGE })
 	private Set<DonHang> dsHoaDon;
-	
 
 	public int getid() {
 		return id;
@@ -94,10 +96,8 @@ public class KhuyenMai {
 		this.nhanVien = nhanVien;
 	}
 
-
-
-	public KhuyenMai(int id, String tenKhuyenMai, Date ngayBatDau, Date ngayHetHan,
-			double giaTriGiam, NhanVien nhanVien) {
+	public KhuyenMai(int id, String tenKhuyenMai, Date ngayBatDau, Date ngayHetHan, double giaTriGiam,
+			NhanVien nhanVien) {
 		super();
 		this.id = id;
 		this.tenKhuyenMai = tenKhuyenMai;
@@ -118,11 +118,8 @@ public class KhuyenMai {
 
 	@Override
 	public String toString() {
-		return "KhuyenMai [id=" + id + ", tenKhuyenMai=" + tenKhuyenMai + ", ngayBatDau=" + ngayBatDau
-				+ ", ngayHetHan=" + ngayHetHan + ", giaTriGiam=" + giaTriGiam + ", nhanVien=" + nhanVien.getTenNhanVien() + "]";
+		return "KhuyenMai [id=" + id + ", tenKhuyenMai=" + tenKhuyenMai + ", ngayBatDau=" + ngayBatDau + ", ngayHetHan="
+				+ ngayHetHan + ", giaTriGiam=" + giaTriGiam + ", nhanVien=" + nhanVien.getTenNhanVien() + "]";
 	}
-	
-	 
-	
-	
+
 }
