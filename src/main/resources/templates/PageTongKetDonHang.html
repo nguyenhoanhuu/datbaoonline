@@ -42,9 +42,12 @@
 			
 				<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" th:each="todoitem1 : ${donhang}">
 				<input class="input100" type="text" name="maHoaDon" placeholder="mahoadon" th:value="'Mã đơn hàng:' +${todoitem1.id}" disabled>
+					<input class="input100" type="text"  placeholder="Ngày đặt hàng" th:value="'Ngày lập đơn hàng:    '+ ${#dates.format(todoitem1.ngayTaoDonHang, 'dd-MM-YYYY')}" disabled>
+					
 					<input class="input100" type="text" name="hoTen" placeholder="Họ tên" th:value="'Tên khách hàng:    '+ ${todoitem1.tenKhachHang}" disabled>
 					<input class="input100" type="text" name="SDT" placeholder="SĐT"  th:value="'Số điện thoại:       '+${todoitem1.SDT}" disabled>
 					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Địa chỉ nhận báo:  '+${todoitem1.diaChiNhanHang}" disabled>
+					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Hình thức thanh toán:  '+${todoitem1.hinhThucThanhToan}" disabled>
 					<input class="input100" type="text" name="trangThai" placeholder="Trạng thái đơn hàng" th:value="'Trạng thái đơn hàng :  '+${todoitem1.trangThaiDonHang}" disabled>
 				</div>
 		
@@ -91,8 +94,7 @@
 			<div class="section-thanh-toan">
 				<ul class="section-khuyenmai">
 					<li style="list-style: none;">
-						<tr>Phương thức thanh toán: </tr>
-						<tr value="Thanh toán tại nhà" >Tại nhà</tr>
+						<tr> </tr>
 					</li>
 
 				</ul>
